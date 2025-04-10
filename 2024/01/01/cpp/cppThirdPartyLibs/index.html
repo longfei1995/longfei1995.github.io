@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"longfei1995.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Eigen库1. Eigen的安装对于ubuntu，只需要输入如下命令即可 123sudo apt install libeigen3-dev# 创建软连接，这样在cpp文件中就可以直接#include&lt;Eigen&#x2F;Dense&gt;而不需要#include&lt;eigen3&#x2F;Eigen&#x2F;Dense&gt;sudo ln -s &#x2F;usr&#x2F;include&#x2F;eigen3&#x2F;Eigen &#x2F;usr&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++第三方库">
+<meta property="og:url" content="https://longfei1995.github.io/2024/01/01/cpp/cppThirdPartyLibs/index.html">
+<meta property="og:site_name" content="胡云浩的blog">
+<meta property="og:description" content="Eigen库1. Eigen的安装对于ubuntu，只需要输入如下命令即可 123sudo apt install libeigen3-dev# 创建软连接，这样在cpp文件中就可以直接#include&lt;Eigen&#x2F;Dense&gt;而不需要#include&lt;eigen3&#x2F;Eigen&#x2F;Dense&gt;sudo ln -s &#x2F;usr&#x2F;include&#x2F;eigen3&#x2F;Eigen &#x2F;usr&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://longfei1995.github.io/2024/01/01/cpp/cppThirdPartyLibs/images/image-20230407153020794.png">
+<meta property="og:image" content="https://longfei1995.github.io/2024/01/01/cpp/cppThirdPartyLibs/images/image-20220815154240357.png">
+<meta property="article:published_time" content="2023-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-10T09:02:53.737Z">
+<meta property="article:author" content="胡云浩">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Eigen">
+<meta property="article:tag" content="spdlog">
+<meta property="article:tag" content="第三方库">
+<meta property="article:tag" content="Protobuf">
+<meta property="article:tag" content="yaml-cpp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://longfei1995.github.io/2024/01/01/cpp/cppThirdPartyLibs/images/image-20230407153020794.png">
+
+<link rel="canonical" href="https://longfei1995.github.io/2024/01/01/cpp/cppThirdPartyLibs/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C++第三方库 | 胡云浩的blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">胡云浩的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">日常笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://longfei1995.github.io/2024/01/01/cpp/cppThirdPartyLibs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="胡云浩">
+      <meta itemprop="description" content="记录生活，记录工作，记录学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="胡云浩的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++第三方库
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2024-01-01T00:00:00+08:00">2024-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-10 17:02:53" itemprop="dateModified" datetime="2025-04-10T17:02:53+08:00">2025-04-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Eigen库"><a href="#Eigen库" class="headerlink" title="Eigen库"></a>Eigen库</h1><h4 id="1-Eigen的安装"><a href="#1-Eigen的安装" class="headerlink" title="1. Eigen的安装"></a>1. Eigen的安装</h4><p>对于ubuntu，只需要输入如下命令即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install libeigen3-dev</span><br><span class="line"><span class="comment"># 创建软连接，这样在cpp文件中就可以直接#include&lt;Eigen/Dense&gt;而不需要#include&lt;eigen3/Eigen/Dense&gt;</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /usr/include/eigen3/Eigen /usr/include/Eigen</span><br></pre></td></tr></table></figure>
+
+<p>对于msys2来说，输入如下命令即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 使用命令pacman -Ss &lt;库名&gt; 来搜索包名</span><br><span class="line">pacman -Ss eigen3</span><br><span class="line"># 出现如下结果</span><br><span class="line">mingw32/mingw-w64-i686-eigen3 3.4.0-1</span><br><span class="line">    Lightweight C++ template library for vector and matrix math (mingw-w64)</span><br><span class="line">mingw64/mingw-w64-x86_64-eigen3 3.4.0-1</span><br><span class="line">    Lightweight C++ template library for vector and matrix math (mingw-w64)</span><br><span class="line">ucrt64/mingw-w64-ucrt-x86_64-eigen3 3.4.0-1</span><br><span class="line">    Lightweight C++ template library for vector and matrix math (mingw-w64)</span><br><span class="line">clang64/mingw-w64-clang-x86_64-eigen3 3.4.0-1</span><br><span class="line">    Lightweight C++ template library for vector and matrix math (mingw-w64)</span><br><span class="line"># 然后安装mingw64的eigen3即可</span><br><span class="line">pacman -S mingw-w64-x86_64-eigen3</span><br></pre></td></tr></table></figure>
+
+<p>如果想直接#include&lt;Eigen&#x2F;Dense&gt;而不是#include&lt;eigen3&#x2F;Eigen&#x2F;Dense&gt;的话，在cmakelist中加入如下语句即可</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 寻找Eigen库</span></span><br><span class="line"><span class="keyword">find_package</span>(Eigen3 REQUIRED)</span><br><span class="line"><span class="comment"># 将Eigen库include进来</span></span><br><span class="line"><span class="keyword">target_include_directories</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> PRIVATE <span class="variable">$&#123;EIGEN3_INCLUDE_DIR&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-矩阵和向量的基本操作"><a href="#2-矩阵和向量的基本操作" class="headerlink" title="2. 矩阵和向量的基本操作"></a>2. 矩阵和向量的基本操作</h4><h5 id="2-1-创建方法"><a href="#2-1-创建方法" class="headerlink" title="2.1 创建方法"></a>2.1 创建方法</h5><p>方法1：通过Matrix&lt;&gt;类模板创建</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//--------------------创建固定矩阵（fixed matrix)-------------------------------</span></span><br><span class="line">Matrix&lt;<span class="keyword">typename</span> Scalar, <span class="type">int</span> RowsAtCompileTime, <span class="type">int</span> ColsAtCompileTime&gt;</span><br><span class="line"><span class="comment">// 第一个参数指定矩阵的数据类型：double、float、int…，第二和第三个参数分别表示矩阵的行数与列数。</span></span><br><span class="line"><span class="comment">// 因此一个简单的矩阵可以声明为：</span></span><br><span class="line">Matrix&lt;<span class="type">double</span>, <span class="number">5</span>, <span class="number">3</span>&gt; mat1;</span><br><span class="line"><span class="comment">//---------------------创建动态矩阵---------------------------------//</span></span><br><span class="line">Matrix&lt;<span class="type">double</span>, Dynamic,Dynamic&gt; mat2;  <span class="comment">//Dynamic是动态创建关键字</span></span><br><span class="line">mat<span class="number">2.</span><span class="built_in">resize</span>(a, b);</span><br><span class="line"><span class="comment">//但需要注意的是resize()这个函数是”毁灭性”(destructive)的，改变大小以后矩阵元素</span></span><br><span class="line"><span class="comment">//会改变。所以它一般只用来对动态矩阵做初始化。而我们认为的改变大小的功能</span></span><br><span class="line"><span class="comment">//对应conservativeResize()函数。顺带一提，如果矩阵变大了，多余的元素为0。</span></span><br><span class="line">mat<span class="number">2.</span><span class="built_in">conservativeResize</span>(a, b);</span><br><span class="line"><span class="comment">//ps:而对于向量，其创建方式与矩阵完全一样(包括预定义的常用大小向量)，不同的就是</span></span><br><span class="line"><span class="comment">//把Matrix换成Vector，这样新建的默认都是列向量，如果需要新建行向量，关键词</span></span><br><span class="line"><span class="comment">//换成RowVector即可。</span></span><br></pre></td></tr></table></figure>
+
+<p>方法2：使用预定义类创建</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法1，X代表大小不确定，d表示数据类型是double</span></span><br><span class="line"><span class="function">MatrixXd <span class="title">mat</span><span class="params">(<span class="number">5</span>, <span class="number">3</span>)</span></span></span><br><span class="line"><span class="function"><span class="comment">//方法2，使用预定义类型</span></span></span><br><span class="line"><span class="function">Matrix3d mat2</span>;</span><br><span class="line">Matrix2i mat3;</span><br><span class="line">Vector2i vec1;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2-初始化方法"><a href="#2-2-初始化方法" class="headerlink" title="2.2 初始化方法"></a>2.2 初始化方法</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在Eigen中可以方便的使用逗号初始化语法(comma-initializer syntax)，如下。</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Eigen;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Matrix3d m;</span><br><span class="line">    m &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,</span><br><span class="line">            <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>,</span><br><span class="line">            <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>;</span><br><span class="line">    cout &lt;&lt; m &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//需要注意：</span></span><br><span class="line"><span class="comment">//1.按顺序读取初始值，依次填充矩阵，直到把第一行填满了再填下一行</span></span><br><span class="line"><span class="comment">//2.初始值的个数必须严格对应矩阵大小，如上面3x3的矩阵共有9个元素就必须要</span></span><br><span class="line"><span class="comment">//有9个初始值，一个萝卜一个坑，多了少了都会报赋值失败的错误。</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-获取元素-大小"><a href="#2-3-获取元素-大小" class="headerlink" title="2.3 获取元素 &amp;&amp; 大小"></a>2.3 获取元素 &amp;&amp; 大小</h5><p><strong>元素获取</strong>：在Eigen中用()获取矩阵或向量中的元素，如m(4,7)就表示获取4行7列的元素。</p>
+<p><strong>元素的修改</strong>：获取到元素后直接赋值即可。</p>
+<p>此外，矩阵分别有.rows()、.cols()、.size()函数来分别获取矩阵的行数、列数以及元素个数。</p>
+<p>.data()函数用于返回一个指向矩阵或向量的首地址的指针。</p>
+<h5 id="2-4-创建特定的矩阵"><a href="#2-4-创建特定的矩阵" class="headerlink" title="2.4 创建特定的矩阵"></a>2.4 创建特定的矩阵</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以上是一些常规“操作”，下面介绍一些方便使用的函数。在创建矩阵时，</span></span><br><span class="line"><span class="comment">//还有一些非常方便的函数，这里简单介绍一下。</span></span><br><span class="line">MatrixXd::<span class="built_in">Random</span>(m,n);					<span class="comment">// 创建m×n维double类型的随机数矩阵</span></span><br><span class="line">MatrixXd::<span class="built_in">Constant</span>(m,n,p);				<span class="comment">// 创建m×n维double类型元素全为p的矩阵</span></span><br><span class="line">MatrixXd::<span class="built_in">Zero</span>(m,n);					<span class="comment">// 创建m×n维元素全为0的矩阵</span></span><br><span class="line">MatrixXd::<span class="built_in">Ones</span>(m,n);					<span class="comment">// 创建m×n维元素全为1的矩阵</span></span><br><span class="line">MatrixXd::<span class="built_in">Identity</span>(m,n);				<span class="comment">// 创建m×n维的单位阵</span></span><br><span class="line">VectorXd::<span class="built_in">LinSpaced</span>(size,low,high);		<span class="comment">// 创建一个size长度的从low到high的向量或一维矩阵</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-5-矩阵的切片操作"><a href="#2-5-矩阵的切片操作" class="headerlink" title="2.5 矩阵的切片操作"></a>2.5 矩阵的切片操作</h5><p>说到矩阵的块操作，熟悉Python的同学应该都非常熟悉Numpy中非常好用的切片功能，这就是用来进行块操作的。Eigen作为矩阵运算库同样也具备块操作的能力。 在Eigen中有两种方式进行块操作：<br>一种是动态尺寸块(dynamic-size block)：mat.block(i,j,p,q)<br>另一种是固定尺寸块(fixed-size block)：mat.block&lt;p,q&gt;(i,j)<br>它们在语义上等价，都表示从矩阵的i行j列开始取大小为p行q列的块，注意p行q列是从第i行j列开始算的。唯一的区别就是如果你的矩阵比较小(固定大小矩阵)，固定尺寸块会有更高的效率。在获得了矩阵块之后即可对其进行修改等一系列操作。<br>特别的：<br>mat.row(n)：用于单独取出第n行<br>mat.col(n)：用于单独取出第n列<br>示例代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Eigen::MatrixXd mat1 = Eigen::MatrixXd::<span class="built_in">Random</span>(<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">    cout&lt;&lt;mat1&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;-------------------&quot;</span>&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;mat<span class="number">1.</span><span class="built_in">block</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">2</span>)&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;-------------------&quot;</span>&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;mat<span class="number">1.</span><span class="built_in">block</span>&lt;<span class="number">2</span>,<span class="number">2</span>&gt;(<span class="number">0</span>,<span class="number">0</span>)&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//-----------------------result-------------------------</span></span><br><span class="line"> <span class="number">-0.997497</span>   <span class="number">0.617481</span>  <span class="number">-0.299417</span></span><br><span class="line">  <span class="number">0.127171</span>   <span class="number">0.170019</span>   <span class="number">0.791925</span></span><br><span class="line"> <span class="number">-0.613392</span> <span class="number">-0.0402539</span>    <span class="number">0.64568</span></span><br><span class="line">-------------------</span><br><span class="line">  <span class="number">0.170019</span>   <span class="number">0.791925</span></span><br><span class="line"><span class="number">-0.0402539</span>    <span class="number">0.64568</span></span><br><span class="line">-------------------</span><br><span class="line"><span class="number">-0.997497</span>  <span class="number">0.617481</span></span><br><span class="line"> <span class="number">0.127171</span>  <span class="number">0.170019</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-矩阵和向量的运算"><a href="#3-矩阵和向量的运算" class="headerlink" title="3. 矩阵和向量的运算"></a>3. 矩阵和向量的运算</h4><h5 id="3-1-四则运算"><a href="#3-1-四则运算" class="headerlink" title="3.1 四则运算"></a>3.1 四则运算</h5><p>Eigen重载了基本的+、-、×运算符，因此可以比较方便地进行运算。需要注意的一点是Eigen对数据类型敏感，并且不会自动类型转换，如自动将float转成double等。因此一个Matrix3d和一个Matrix3f相乘是会报错的。</p>
+<ul>
+<li>加法+：只能用于相同大小矩阵</li>
+<li>减法-：只能用于相同大小矩阵</li>
+<li>乘法*：矩阵与标量、矩阵与矩阵</li>
+<li>除法&#x2F;：只能用于矩阵与标量</li>
+</ul>
+<p>代码示例如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">Eigen::MatrixXd <span class="title">mat1</span><span class="params">(<span class="number">2</span>, <span class="number">2</span>)</span></span>;</span><br><span class="line">    mat1 &lt;&lt; <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>;</span><br><span class="line">    <span class="function">Eigen::MatrixXd <span class="title">mat2</span><span class="params">(mat<span class="number">1.</span>rows(), mat<span class="number">1.</span>cols())</span></span>;     <span class="comment">// 构造同型矩阵</span></span><br><span class="line">    mat2 &lt;&lt; <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>;</span><br><span class="line">    cout &lt;&lt; mat1 + mat2 &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; mat1 - mat2 &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; mat1 * mat2 &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; mat1 / <span class="number">2</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-2-向量的数量积，点积，叉乘"><a href="#3-2-向量的数量积，点积，叉乘" class="headerlink" title="3.2 向量的数量积，点积，叉乘"></a>3.2 向量的数量积，点积，叉乘</h5><p><strong>标量积</strong>：向量*标量，结果还是一个向量，对应向量的缩放。</p>
+<p><strong>点积</strong>： 结果是个标量。从几何角度看，点积则是两个向量的长度与它们夹角余弦的积，几何意义：一个向量向另一个向量的投影。</p>
+<p><strong>叉积</strong>：结果是个向量。axb &#x3D; ||a||*||b||<em>sinθ</em>n，几何意义：如果以向量a,b为边构成一个平行四边形，那么这两个向量叉积的模长与这个平行四边形的正面积相等。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Vector3i <span class="title">v1</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line"><span class="function">Vector3i <span class="title">v2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line"><span class="comment">//点积</span></span><br><span class="line">v<span class="number">1.</span><span class="built_in">dot</span>(v2);</span><br><span class="line"><span class="comment">//叉积</span></span><br><span class="line">v<span class="number">1.</span><span class="built_in">cross</span>(v2);</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-3-矩阵本身运算"><a href="#3-3-矩阵本身运算" class="headerlink" title="3.3 矩阵本身运算"></a><strong>3.3 矩阵本身运算</strong></h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">mat.<span class="built_in">transpose</span>();		<span class="comment">// 转置矩阵。对于矩阵转置，注意不要写成a = a.transpose()，这会导致错误结果(Aliasing Issue)，如果一定需要对原矩阵进行修改，使用a.transposeInPlace()函数，或者a = a.transpose.eval()。</span></span><br><span class="line">mat.<span class="built_in">inverse</span>();			<span class="comment">// 逆矩阵</span></span><br><span class="line">mat.<span class="built_in">conjugate</span>();		<span class="comment">// 共轭矩阵</span></span><br><span class="line">mat.<span class="built_in">adjoint</span>();			<span class="comment">// 伴随矩阵</span></span><br><span class="line">mat.<span class="built_in">trace</span>();			<span class="comment">// 矩阵的迹</span></span><br><span class="line">mat.<span class="built_in">eigenvalues</span>();		<span class="comment">// 矩阵的特征值</span></span><br><span class="line">mat.<span class="built_in">determinant</span>();		<span class="comment">// 矩阵求行列式的值</span></span><br><span class="line">mat.<span class="built_in">diagonal</span>();			<span class="comment">// 矩阵对角线元素</span></span><br><span class="line">mat.<span class="built_in">sum</span>();				<span class="comment">// 矩阵所有元素求和</span></span><br><span class="line">mat.<span class="built_in">prod</span>();				<span class="comment">// 矩阵所有元素求积</span></span><br><span class="line">mat.<span class="built_in">mean</span>();				<span class="comment">// 矩阵所有元素求平均</span></span><br><span class="line">mat.<span class="built_in">cwiseAbs</span>();			<span class="comment">// 矩阵所有元素求绝对值</span></span><br><span class="line">mat.<span class="built_in">minCoeff</span>();			<span class="comment">// 矩阵所有元素最小值</span></span><br><span class="line">mat.<span class="built_in">minCoeff</span>(&amp;i,&amp;j);    <span class="comment">// 矩阵所有元素最小值的位置，i、j为int类型或为Eigen的Index类型。</span></span><br><span class="line">mat.<span class="built_in">maxCoeff</span>();			<span class="comment">// 矩阵所有元素最大值</span></span><br><span class="line">mat.<span class="built_in">maxCoeff</span>(&amp;i,&amp;j);    <span class="comment">// 矩阵所有元素最大值的位置</span></span><br><span class="line">mat.<span class="built_in">nonZeros</span>();			<span class="comment">// 矩阵中非零元素个数</span></span><br><span class="line">mat.<span class="built_in">squaredNorm</span>();		<span class="comment">// 矩阵(向量)的平方范数，对向量而言等价于其与自身做点积，数值上等于各分量的平方和。</span></span><br><span class="line">mat.<span class="built_in">norm</span>();				<span class="comment">// 矩阵(向量)的平方范数开根号(对于向量即求模长)</span></span><br><span class="line">mat.<span class="built_in">lpNorm</span>&lt;<span class="number">1</span>&gt;();		<span class="comment">// 矩阵(向量)的L1范数</span></span><br><span class="line">mat.<span class="built_in">lpNorm</span>&lt;<span class="number">2</span>&gt;();		<span class="comment">// 矩阵(向量)的L2范数</span></span><br><span class="line">mat.<span class="built_in">lpNorm</span>&lt;Infinity&gt;();	<span class="comment">// 矩阵(向量)的L无穷范数</span></span><br><span class="line">mat.<span class="built_in">lpNorm</span>&lt;p&gt;();		<span class="comment">// 矩阵(向量)的Lp范数</span></span><br><span class="line">mat.<span class="built_in">normalize</span>();		<span class="comment">// 矩阵(向量)的正则化(归一化)，使所有元素的平方和等于1。</span></span><br><span class="line">(mat&gt;<span class="number">0</span>).<span class="built_in">all</span>();			<span class="comment">// 矩阵元素条件判断，mat中所有元素是否都大于0，是返回1，否则返回0。</span></span><br><span class="line">(mat&gt;<span class="number">0</span>).<span class="built_in">any</span>();			<span class="comment">// 矩阵元素条件判断，mat中所有元素是否有大于0的，有返回1，否则返回0。</span></span><br><span class="line">(mat&gt;<span class="number">0</span>).<span class="built_in">count</span>();		<span class="comment">// 矩阵符合条件的元素计数，返回mat中大于0元素的个数。</span></span><br><span class="line">mat.<span class="built_in">colwise</span>();			<span class="comment">// 返回矩阵每列的值</span></span><br><span class="line">mat.<span class="built_in">rowwise</span>();			<span class="comment">// 返回矩阵每行的值</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-Array"><a href="#4-Array" class="headerlink" title="4. Array"></a>4. Array</h4><p>相比于Matrix面向线性代数而设计，Array是Eigen中一个特别的类型，其设计的初衷是面向“元素级”运算(coefficient-wise operation)，具有更一般的用途。例如两个相同大小矩阵间元素级的乘法(相同位置元素相乘并放在对应位置)。其创建、初始化等操作均与Matrix相同，不同的是关键词换成Array，Eigen也提供了预定义好的类型。但与Matrix稍有不同的是，形如ArrayXd表示的并不是X×X的矩阵，而是长度为X的1维数组；对于2维Array表示为ArrayXXd。</p>
+<h5 id="4-1-Array的四则运算"><a href="#4-1-Array的四则运算" class="headerlink" title="4.1 Array的四则运算"></a>4.1 Array的四则运算</h5><p>同样的，Array也重载了四则运算符。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">Eigen::ArrayXd <span class="title">arr1</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::ArrayXd <span class="title">arr2</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">    arr1 &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;</span><br><span class="line">    arr2 &lt;&lt; <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>;</span><br><span class="line">    <span class="comment">// 数组与元素</span></span><br><span class="line">    cout &lt;&lt; (arr1) + <span class="number">2</span> &lt;&lt; endl;   <span class="comment">// result = [3, 4, 5]</span></span><br><span class="line">    cout &lt;&lt; (arr1) - <span class="number">2</span> &lt;&lt; endl;   <span class="comment">// result = [-1, 0, 1]</span></span><br><span class="line">    cout &lt;&lt; (arr1) * <span class="number">2</span> &lt;&lt; endl;   <span class="comment">// result = [2, 4, 6]</span></span><br><span class="line">    cout &lt;&lt; (arr1) / <span class="number">2</span> &lt;&lt; endl;   <span class="comment">// result = [0.5, 1, 1.5]</span></span><br><span class="line">    <span class="comment">// 数组与数组</span></span><br><span class="line">    cout &lt;&lt; arr1 + arr2 &lt;&lt; endl;  <span class="comment">// result = [3, 6, 9]</span></span><br><span class="line">    cout &lt;&lt; arr1 - arr2 &lt;&lt; endl;  <span class="comment">// result = [-1, -2, -3]</span></span><br><span class="line">    cout &lt;&lt; arr1 * arr2 &lt;&lt; endl;  <span class="comment">// result = [2, 8, 18]</span></span><br><span class="line">    cout &lt;&lt; arr1 / arr2 &lt;&lt; endl;  <span class="comment">// result = [0.5, 0.5, 0.5]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-2-其他操作"><a href="#4-2-其他操作" class="headerlink" title="4.2 其他操作"></a>4.2 其他操作</h5><ul>
+<li><p>arr.abs()：逐元素取绝对值 </p>
+</li>
+<li><p>arr.sqrt()：逐元素开根号 </p>
+</li>
+<li><p>arr.pow(n)：逐元素n次方 </p>
+</li>
+<li><p>arr1.min(arr2)：将两个Array中相应位置的最小值组成一个新Array </p>
+</li>
+<li><p>arr1.max(arr2)：将两个Array中相应位置的最大值组成一个新Array</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">Eigen::ArrayXd <span class="title">arr1</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::ArrayXd <span class="title">arr2</span><span class="params">(<span class="number">3</span>)</span></span>;</span><br><span class="line">    arr1 &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;</span><br><span class="line">    arr2 &lt;&lt; <span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>;</span><br><span class="line">    cout &lt;&lt; arr<span class="number">1.</span><span class="built_in">pow</span>(<span class="number">2</span>) &lt;&lt; endl;  		<span class="comment">// result = [1, 4, 9]</span></span><br><span class="line">    cout &lt;&lt; arr<span class="number">1.</span><span class="built_in">min</span>(arr2) &lt;&lt; endl;     <span class="comment">// result = [1, 1, 3]</span></span><br><span class="line">    cout &lt;&lt; arr<span class="number">1.</span><span class="built_in">max</span>(arr2) &lt;&lt; endl;     <span class="comment">// result = [2, 2, 4]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-3-Array和Matrix之间的转换"><a href="#4-3-Array和Matrix之间的转换" class="headerlink" title="4.3 Array和Matrix之间的转换"></a>4.3 Array和Matrix之间的转换</h5><p>可以看到Array在元素级运算上有着强大的优势，其本身也可以与Matrix相互转换，也十分简单。</p>
+<ul>
+<li>将Matrix转换为Array函数为mat.array()</li>
+<li>将Array转换为Matrix函数为arr.matrix()</li>
+</ul>
+<p>这样的转换不用担心会有运行时性能的损耗。但需要注意的是Eigen是不允许Matrix和Array混合运算的。</p>
+<p>事实上，由于元素级运算在矩阵中很常见，所以Eigen对于Matrix其实内置了一些函数，均以cwise开头，如mat.cwiseProduct()对应元素相乘、mat.cwiseAbs()元素取绝对值、mat.cwiseSqrt()逐元素开根号、mat.cwiseMin()将两个矩阵中相应位置的最小值组成一个新矩阵等等，更多函数可以查看官方文档。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 想要将想要将向量中的每个元素都减去5,但直接vec1-5是错误的，因为向量减法只支持同形向量</span></span><br><span class="line">    <span class="function">Eigen::VectorXd <span class="title">vec</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line">    vec &lt;&lt; <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>;</span><br><span class="line">    vec = (vec.<span class="built_in">array</span>() - <span class="number">5</span>).<span class="built_in">matrix</span>();     <span class="comment">// 先转换成array做元素的减法，然后转回vector</span></span><br><span class="line">    cout &lt;&lt; vec &lt;&lt; endl;                  <span class="comment">// result = [1, 2, 3, 4, 5]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-STL容器与Eigen的转换"><a href="#5-STL容器与Eigen的转换" class="headerlink" title="5. STL容器与Eigen的转换"></a>5. STL容器与Eigen的转换</h4><p>Map类主要是用来处理C++中原生的数组的，这样就可以将其转化为Eigen中的矩阵或向量进行操作了。它也可以用于修改矩阵大小、切片等操作中。新建Map对象的模板参数如下：</p>
+<blockquote>
+<p>Map<MatrixXd> mat1(STL数组的地址，行数，列数)</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将STL数组转换成Eigen中的Matrix或Vecotor</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::vector&lt;<span class="type">double</span>&gt; v1;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        v<span class="number">1.</span><span class="built_in">push_back</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Eigen::Map&lt;Eigen::MatrixXd&gt; <span class="title">mat1</span><span class="params">(v<span class="number">1.</span>data(), <span class="number">2</span>, <span class="number">5</span>)</span></span>;</span><br><span class="line">    <span class="function">Eigen::Map&lt;Eigen::VectorXd&gt; <span class="title">mat2</span><span class="params">(v<span class="number">1.</span>data(), <span class="number">4</span>)</span></span>;</span><br><span class="line">	Eigen::Map&lt;Eigen::Matrix&lt;<span class="type">float</span>, Eigen::Dynamic, <span class="number">1</span>&gt;&gt; <span class="built_in">vec1</span>(v<span class="number">1.</span><span class="built_in">data</span>(), v<span class="number">1.</span><span class="built_in">size</span>());</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;mat1:&quot;</span> &lt;&lt; endl &lt;&lt; mat1 &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;mat2:&quot;</span> &lt;&lt; endl &lt;&lt; mat2 &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 将Eigen中的Matrix或Vector转成STL数组</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test02</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">Eigen::MatrixXd <span class="title">mat1</span><span class="params">(<span class="number">2</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">    mat1 &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>;</span><br><span class="line">    <span class="function">std::vector&lt;<span class="type">double</span>&gt; <span class="title">v1</span><span class="params">(mat<span class="number">1.</span>data(), mat<span class="number">1.</span>data()+mat<span class="number">1.</span>size())</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)&#123;</span><br><span class="line">        cout &lt;&lt; v1[i] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Qt"><a href="#Qt" class="headerlink" title="Qt"></a>Qt</h1><h4 id="1-clion-Qt-IDE配置"><a href="#1-clion-Qt-IDE配置" class="headerlink" title="1. clion + Qt IDE配置"></a>1. clion + Qt IDE配置</h4><p><strong>Term1: 指定Qt的安装位置，以便使用find_package找到qt相关的库</strong></p>
+<p>方法1：在CMakeList.txt中添加如下语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set(CMAKE_PREFIX_PATH &quot;D:\\Qt\\Qt5.12.12\\5.12.12\\mingw73_64\\&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>方法2：在clion的设置-&gt;构建、执行、部署-&gt;CMake-&gt;CMake选项，添加如下语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-DCMAKE_PREFIX_PATH=D:\Qt\Qt5.12.12\5.12.12\mingw73_64\ </span><br></pre></td></tr></table></figure>
+
+<p><strong>Term2: 指定外部配置工具(Clion-&gt;tools-&gt;External tools)</strong></p>
+<p><strong>Qt Designer</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Name : Qt Designer</span><br><span class="line">Program : D:\Qt\Qt5.12.12\5.12.12\mingw73_64\bin\designer.exe</span><br><span class="line">Arguments : $FilePath$</span><br><span class="line">Working directory : $ProjectFileDir$</span><br></pre></td></tr></table></figure>
+
+<p><strong>UIC</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Name : uic</span><br><span class="line">Program : D:\Qt\Qt5.12.12\5.12.12\mingw73_64\bin\uic.exe</span><br><span class="line">Arguments : $FileName$ -o ui_$FileNameWithoutExtension$.h</span><br><span class="line">Working directory : $FileDir$</span><br></pre></td></tr></table></figure>
+
+<p><strong>QRC</strong></p>
+<p>.qrc文件的创建可以在File-&gt;settings-&gt;Editor-&gt;File and Code Templates点击+，创建一个Qt Resource模板，后缀为qrc</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">RCC</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">qresource</span> <span class="attr">prefix</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">file</span>&gt;</span>xxx.png<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">qresource</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">RCC</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>类似这样，然后把xxx.png放在.qrc的同一目录即可</p>
+<p>然后在代码中即可使用.qrc资源<code>setWindowIcon(QIcon(&quot;:/star.png&quot;));</code></p>
+<p><strong>Term3: 指定程序运行时的环境变量</strong></p>
+<p><code>PATH=D:\Qt\Qt5.12.12\5.12.12\mingw73_64\bin</code></p>
+<img src="images/image-20230407153020794.png" alt="image-20230407153020794" style="zoom: 67%;" />
+
+<h4 id="2-安装常见问题"><a href="#2-安装常见问题" class="headerlink" title="2. 安装常见问题"></a>2. 安装常见问题</h4><p><strong>Term1: 命令行找不到qmake</strong></p>
+<blockquote>
+<p>问题描述：在命令行输入qmake –version，报错如下：could not exec ‘&#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;qt4&#x2F;bin&#x2F;qmake’: No such file or directory</p>
+<p>原因分析：因为qtchooser默认选择路径中，没有指向你安装的qmake路径所在的路径</p>
+</blockquote>
+<p>解决办法：</p>
+<p>1.确认qmake的安装路径，比如<code>/home/hyh/Qt5.9.9/5.9.9/gcc_64/bin</code></p>
+<p>2.打开qtchooser配置文件，将次安装路径放到第一行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> gedit /usr/lib/x86_64-linux-gnu/qt-default/qtchooser/default.conf </span><br></pre></td></tr></table></figure>
+
+<h4 id="3-Qt的一些语法"><a href="#3-Qt的一些语法" class="headerlink" title="3. Qt的一些语法"></a>3. Qt的一些语法</h4><h5 id="2-1-信号与槽"><a href="#2-1-信号与槽" class="headerlink" title="2.1 信号与槽"></a>2.1 信号与槽</h5><h6 id="2-1-1-针对重载函数的connect"><a href="#2-1-1-针对重载函数的connect" class="headerlink" title="2.1.1 针对重载函数的connect"></a>2.1.1 针对重载函数的connect</h6><p>我们来定义一个简单的包含重载信号和重载槽函数的类。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Me</span> : <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">Q_OBJECT</span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">hungry</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">hungry</span><span class="params">(std::string somthing)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">eat</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">eat</span><span class="params">(std::string somthing)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以使用QOverload来连接信号与槽</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QObject::<span class="built_in">connect</span>(<span class="keyword">this</span>, QOverload&lt;std::string&gt;::<span class="built_in">of</span>(&amp;Me::hungry), <span class="keyword">this</span>, QOverload&lt;std::string&gt;::<span class="built_in">of</span>(&amp;Me::eat))</span><br></pre></td></tr></table></figure>
+
+<p>QOverload 的作用是返回重载函数的指针，模板参数为函数类型列表</p>
+<h4 id="4-Qt程序的打包"><a href="#4-Qt程序的打包" class="headerlink" title="4. Qt程序的打包"></a>4. Qt程序的打包</h4><h5 id="4-1-windows下的打包"><a href="#4-1-windows下的打包" class="headerlink" title="4.1 windows下的打包"></a>4.1 windows下的打包</h5><ul>
+<li><p>首先将需要打包的程序生成<code>release</code>版本</p>
+</li>
+<li><p>在可执行程序目录，按下<code>shift </code>+<code>鼠标右键</code>， 找到<code>在此处打开powershell</code></p>
+</li>
+<li><p>添加一下系统的环境变量</p>
+</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$Env:PATH</span>=<span class="string">&quot;C:\msys64\mingw64\bin;D:\Qt\Qt5.12.12\5.12.12\mingw73_64\bin;<span class="variable">$Env:PATH</span>&quot;</span> </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>然后执行qt自带的程序</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;<span class="string">&quot;D:\Qt\Qt5.12.12\5.12.12\mingw73_64\bin\windeployqt.exe&quot;</span> QPlan.exe <span class="literal">--release</span></span><br></pre></td></tr></table></figure>
+
+<p>如果程序编译时的<code>CMAKE_BUILD_TYPE</code>为<code>Debug</code>的话，那么执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;&quot;D:\Qt\Qt5.12.12\5.12.12\mingw73_64\bin\windeployqt.exe&quot; QPlan.exe --debug</span><br></pre></td></tr></table></figure>
+
+<h1 id="Protobuf"><a href="#Protobuf" class="headerlink" title="Protobuf"></a>Protobuf</h1><h4 id="1-protobuf的安装"><a href="#1-protobuf的安装" class="headerlink" title="1. protobuf的安装"></a>1. protobuf的安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载 protoBuf：</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/protocolbuffers/protobuf.git</span><br><span class="line"><span class="comment"># 安装依赖库</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install autoconf  automake  libtool curl make  g++  unzip libffi-dev -y</span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> protobuf/ &amp;&amp; <span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build/</span><br><span class="line"><span class="comment"># 生成makefile</span></span><br><span class="line">cmake -Dprotobuf_BUILD_TESTS=OFF ..</span><br><span class="line"><span class="comment"># 编译源码，注意cmake --build和make有同样的功效，而且跨平台效果更好</span></span><br><span class="line">cmake --build . --parallel 10</span><br><span class="line"><span class="comment"># 安装，同样的，和make install有同样的功效</span></span><br><span class="line"><span class="built_in">sudo</span> cmake --install .</span><br><span class="line"><span class="comment"># 刷新共享库 （很重要的一步啊）</span></span><br><span class="line"><span class="built_in">sudo</span> ldconfig </span><br><span class="line"><span class="comment"># 安装成功，即可显示版本</span></span><br><span class="line">$ protoc --version</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-protobuf的使用"><a href="#2-protobuf的使用" class="headerlink" title="2. protobuf的使用"></a>2. protobuf的使用</h4><p>将.proto生成.h和.cpp <code>protoc xxx.proto --cpp_out=./</code></p>
+<h1 id="Ipopt-CppAD"><a href="#Ipopt-CppAD" class="headerlink" title="Ipopt&#x2F;CppAD"></a>Ipopt&#x2F;CppAD</h1><h4 id="1-ipopt安装"><a href="#1-ipopt安装" class="headerlink" title="1. ipopt安装"></a>1. ipopt安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.安装其他依赖库</span></span><br><span class="line"><span class="built_in">sudo</span> apt install gfortran unzip</span><br><span class="line"><span class="comment"># 2.在/tmp/目录下（使用/tmp目录只是示例，随便哪个目录都行)，使用wget下载ipopt的包，并且解压</span></span><br><span class="line"><span class="built_in">cd</span> /tmp/</span><br><span class="line">wget https://www.coin-or.org/download/source/Ipopt/Ipopt-3.12.7.zip &amp;&amp; unzip Ipopt-3.12.7.zip &amp;&amp; <span class="built_in">rm</span> Ipopt-3.12.7.zip</span><br><span class="line"><span class="comment"># 3.使用脚本安装ipopt，p.s.脚本放在在本文档同级目录下的scripts文件夹下</span></span><br><span class="line"><span class="built_in">sudo</span> ./install_ipopt.sh Ipopt-3.12.7</span><br></pre></td></tr></table></figure>
+
+<h1 id="Abseil"><a href="#Abseil" class="headerlink" title="Abseil"></a>Abseil</h1><h4 id="1-abseil安装"><a href="#1-abseil安装" class="headerlink" title="1. abseil安装"></a>1. abseil安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.进入tmp目录</span></span><br><span class="line"><span class="built_in">cd</span> /tmp/</span><br><span class="line"><span class="comment"># 2.从github拉取abseil源码</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/abseil/abseil-cpp.git</span><br><span class="line"><span class="comment"># 3.建立build文件夹</span></span><br><span class="line"><span class="built_in">cd</span> abseil-cpp &amp;&amp; <span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line"><span class="comment"># 4.生成makefile，指定C++14(abseil最低要求)</span></span><br><span class="line">cmake -DABSL_BUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON -DCMAKE_CXX_STANDARD=14 ..</span><br><span class="line"><span class="comment"># 5.build</span></span><br><span class="line">cmake --build . --target all</span><br><span class="line"><span class="comment"># 6.install</span></span><br><span class="line"><span class="built_in">sudo</span> cmake --install .</span><br><span class="line"><span class="comment"># 7.刷新共享库</span></span><br><span class="line"><span class="built_in">sudo</span> ldconfig</span><br></pre></td></tr></table></figure>
+
+<p>CMakeList.txt模板，注意Abseil库最低要求C++14（支持C++17 C++20）</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.8</span>.<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(my_project)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Abseil requires C++14</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">14</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD_REQUIRED <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Import Abseil&#x27;s CMake targets</span></span><br><span class="line"><span class="keyword">find_package</span>(absl REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(hello_world hello_world.cc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Declare dependency on the absl::strings library</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(hello_world absl::strings)</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/abseil/abseil-cpp/blob/master/CMake/README.md">可以链接的Abseil公共库</a>，如下图所示：</p>
+<img src="images/image-20220815154240357.png" alt="image-20220815154240357" style="zoom: 50%;" />
+
+<h1 id="spdlog"><a href="#spdlog" class="headerlink" title="spdlog"></a>spdlog</h1><h4 id="1-spdlog安装"><a href="#1-spdlog安装" class="headerlink" title="1. spdlog安装"></a>1. spdlog安装</h4><p>仓库地址：<a target="_blank" rel="noopener" href="https://github.com/gabime/spdlog">https://github.com/gabime/spdlog</a></p>
+<p>安装方法：spdlog是一个head-only的库，只需要将git仓库中的include文件夹复制到自己的项目即可。</p>
+<p>安装方法2: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/gabime/spdlog.git</span><br><span class="line"><span class="built_in">cd</span> spdlog &amp;&amp; <span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">cmake .. &amp;&amp; make -j8</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-使用方法"><a href="#2-2-使用方法" class="headerlink" title="2.2 使用方法"></a>2.2 使用方法</h4><p>spdlog用什么类，就包含哪个头文件</p>
+<blockquote>
+<p>spdlog takes the “include what you need” approach - your code should include the features that actually needed.</p>
+<p>For example, if you only need rotating logger, you need to include “<strong>spdlog&#x2F;sinks&#x2F;rotating_file_sink.h</strong>“.</p>
+</blockquote>
+<h5 id="2-1-spdlog库基本架构"><a href="#2-1-spdlog库基本架构" class="headerlink" title="2.1 spdlog库基本架构"></a>2.1 spdlog库基本架构</h5><ul>
+<li>sink: 进行底层操作（比如格式化内容、输出内容到控制台&#x2F;文件）的类。spdlog自带的几种sinks已经能满足日常需求，也可以派生其基类设计新的sink以满足特殊的需求。sink类主要使用的函数包括：</li>
+</ul>
+<p>​				<code>set_pattern(const std::string&amp;)</code> ：设置日志输出的内容格式。</p>
+<p>​				<code>set_level(level_enum)</code> ： 设置日志输出的最低等级。</p>
+<p>​				<code>log(log_msg)</code> ：由logger自动调用，外部不会主动调用。</p>
+<ul>
+<li>logger: 与程序员交互，用以输出日志的类。一个logger对象中可以有多个sink，当logger调用日志输出函数时，logger会调用自身存储的所有sink对象的log(log_msg) 函数进行输出。spdlog也自带了几种logger。logger类主要使用的函数包括：</li>
+</ul>
+<p>​				<code>set_pattern(const std::string&amp;)</code> ：设置logger中包含的所有sink的日志输出内容格式。</p>
+<p>​				<code>set_level(level_enum)</code> ：设置logger日志输出最低等级，如果logger包含的sink没有设置日志等级的话，则会为其设置日志等级。</p>
+<p>​				<code>log(level_enum level,log_msg content)</code> ：按照level等级进行输出content，如果level&gt;logger等级且大于某个sink的等级，则该sink会输出。</p>
+<ul>
+<li>st&#x2F;mt： 对象版本，spdlog中的logger对象和sink对象都有两种版本，一种是以st结尾的单线程版本，以及以mt结尾的多线程版本。</li>
+</ul>
+<p>​				st：单线程版本，不用加锁，效率更高。<br>​				mt：多线程版本，用于多线程程序是线程安全的。</p>
+<h5 id="2-2-spdlog的日志等级"><a href="#2-2-spdlog的日志等级" class="headerlink" title="2.2 spdlog的日志等级"></a>2.2 spdlog的日志等级</h5><p><code>spdlog</code>的日志等级如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">trace = SPDLOG_LEVEL_TRACE <span class="comment">// 最低级（用来记录代码执行轨迹）</span></span><br><span class="line">debug = SPDLOG_LEVEL_DEBUG <span class="comment">//      （用来记录debug信息）</span></span><br><span class="line">info = SPDLOG_LEVEL_INFO   <span class="comment">// 在上面的测试例子中用过</span></span><br><span class="line">warn = SPDLOG_LEVEL_WARN</span><br><span class="line">err = SPDLOG_LEVEL_ERROR</span><br><span class="line">critical = SPDLOG_LEVEL_CRITICAL</span><br><span class="line">off = SPDLOG_LEVEL_OFF     <span class="comment">// 最高级</span></span><br></pre></td></tr></table></figure>
+
+<p><code>spdlog</code>默认的是<code>info</code>等级，可以通过<code>set_level</code>函数设置<code>sink</code>或者<code>logger</code>的等级。设置等级的作用在于，可以在程序运行前确定输出的内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spdlog::set_level(spdlog::level::info); // 只显示info及比info高级的信息，logger.trace() 和 logger.debug() 不显示</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-spdlog的pattern设置"><a href="#2-3-spdlog的pattern设置" class="headerlink" title="2.3 spdlog的pattern设置"></a>2.3 spdlog的pattern设置</h5><p>日志内容的前面的title是可以通过pattern设置的，可设置的参数如下图所示。</p>
+<table>
+<thead>
+<tr>
+<th>flag</th>
+<th>meaning</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%v</code></td>
+<td>The actual text to log</td>
+<td>“some user text”</td>
+</tr>
+<tr>
+<td><code>%t</code></td>
+<td>Thread id</td>
+<td>“1232”</td>
+</tr>
+<tr>
+<td><code>%P</code></td>
+<td>Process id</td>
+<td>“3456”</td>
+</tr>
+<tr>
+<td><code>%n</code></td>
+<td>Logger’s name</td>
+<td>“some logger name”</td>
+</tr>
+<tr>
+<td><code>%l</code></td>
+<td>The log level of the message</td>
+<td>“debug”, “info”, etc</td>
+</tr>
+<tr>
+<td><code>%L</code></td>
+<td>Short log level of the message</td>
+<td>“D”, “I”, etc</td>
+</tr>
+<tr>
+<td><code>%a</code></td>
+<td>Abbreviated weekday name</td>
+<td>“Thu”</td>
+</tr>
+<tr>
+<td><code>%A</code></td>
+<td>Full weekday name</td>
+<td>“Thursday”</td>
+</tr>
+<tr>
+<td><code>%b</code></td>
+<td>Abbreviated month name</td>
+<td>“Aug”</td>
+</tr>
+<tr>
+<td><code>%B</code></td>
+<td>Full month name</td>
+<td>“August”</td>
+</tr>
+<tr>
+<td><code>%c</code></td>
+<td>Date and time representation</td>
+<td>“Thu Aug 23 15:35:46 2014”</td>
+</tr>
+<tr>
+<td><code>%C</code></td>
+<td>Year in 2 digits</td>
+<td>“14”</td>
+</tr>
+<tr>
+<td><code>%Y</code></td>
+<td>Year in 4 digits</td>
+<td>“2014”</td>
+</tr>
+<tr>
+<td><code>%D</code> or <code>%x</code></td>
+<td>Short MM&#x2F;DD&#x2F;YY date</td>
+<td>“08&#x2F;23&#x2F;14”</td>
+</tr>
+<tr>
+<td><code>%m</code></td>
+<td>Month 01-12</td>
+<td>“11”</td>
+</tr>
+<tr>
+<td><code>%d</code></td>
+<td>Day of month 01-31</td>
+<td>“29”</td>
+</tr>
+<tr>
+<td><code>%H</code></td>
+<td>Hours in 24 format 00-23</td>
+<td>“23”</td>
+</tr>
+<tr>
+<td><code>%I</code></td>
+<td>Hours in 12 format 01-12</td>
+<td>“11”</td>
+</tr>
+<tr>
+<td><code>%M</code></td>
+<td>Minutes 00-59</td>
+<td>“59”</td>
+</tr>
+<tr>
+<td><code>%S</code></td>
+<td>Seconds 00-59</td>
+<td>“58”</td>
+</tr>
+<tr>
+<td><code>%e</code></td>
+<td>Millisecond part of the current second 000-999</td>
+<td>“678”</td>
+</tr>
+<tr>
+<td><code>%f</code></td>
+<td>Microsecond part of the current second 000000-999999</td>
+<td>“056789”</td>
+</tr>
+<tr>
+<td><code>%F</code></td>
+<td>Nanosecond part of the current second 000000000-999999999</td>
+<td>“256789123”</td>
+</tr>
+<tr>
+<td><code>%p</code></td>
+<td>AM&#x2F;PM</td>
+<td>“AM”</td>
+</tr>
+<tr>
+<td><code>%r</code></td>
+<td>12 hour clock</td>
+<td>“02:55:02 PM”</td>
+</tr>
+<tr>
+<td><code>%R</code></td>
+<td>24-hour HH:MM time, equivalent to %H:%M</td>
+<td>“23:55”</td>
+</tr>
+<tr>
+<td><code>%T</code> or <code>%X</code></td>
+<td>ISO 8601 time format (HH:MM:SS), equivalent to %H:%M:%S</td>
+<td>“23:55:59”</td>
+</tr>
+<tr>
+<td><code>%z</code></td>
+<td>ISO 8601 offset from UTC in timezone ([+&#x2F;-]HH:MM)</td>
+<td>“+02:00”</td>
+</tr>
+<tr>
+<td><code>%E</code></td>
+<td>Seconds since the epoch</td>
+<td>“1528834770”</td>
+</tr>
+<tr>
+<td><code>%%</code></td>
+<td>The % sign</td>
+<td>“%”</td>
+</tr>
+<tr>
+<td><code>%+</code></td>
+<td>spdlog’s default format</td>
+<td>“[2014-10-31 23:46:59.678] [mylogger] [info] Some message”</td>
+</tr>
+<tr>
+<td><code>%^</code></td>
+<td>start color range (can be used only once)</td>
+<td>“[mylogger] [info(green)] Some message”</td>
+</tr>
+<tr>
+<td><code>%$</code></td>
+<td>end color range (for example %^[+++]%$ %v) (can be used only once)</td>
+<td>[+++] Some message</td>
+</tr>
+<tr>
+<td><code>%@</code></td>
+<td>Source file and line (use SPDLOG_TRACE(..), SPDLOG_INFO(…) etc. instead of spdlog::trace(…)) Same as %g:%#</td>
+<td>&#x2F;some&#x2F;dir&#x2F;my_file.cpp:123</td>
+</tr>
+<tr>
+<td><code>%s</code></td>
+<td>Basename of the source file (use SPDLOG_TRACE(..), SPDLOG_INFO(…) etc.)</td>
+<td>my_file.cpp</td>
+</tr>
+<tr>
+<td><code>%g</code></td>
+<td>Full or relative path of the source file as appears in the <code>__FILE__</code> macro (use SPDLOG_TRACE(..), SPDLOG_INFO(…) etc.)</td>
+<td>&#x2F;some&#x2F;dir&#x2F;my_file.cpp</td>
+</tr>
+<tr>
+<td><code>%#</code></td>
+<td>Source line (use SPDLOG_TRACE(..), SPDLOG_INFO(…) etc.)</td>
+<td>123</td>
+</tr>
+<tr>
+<td><code>%!</code></td>
+<td>Source function (use SPDLOG_TRACE(..), SPDLOG_INFO(…) etc. see tweakme for pretty-print)</td>
+<td>my_func</td>
+</tr>
+<tr>
+<td><code>%o</code></td>
+<td>Elapsed time in milliseconds since previous message</td>
+<td>456</td>
+</tr>
+<tr>
+<td><code>%i</code></td>
+<td>Elapsed time in microseconds since previous message</td>
+<td>456</td>
+</tr>
+<tr>
+<td><code>%u</code></td>
+<td>Elapsed time in nanoseconds since previous message</td>
+<td>11456</td>
+</tr>
+<tr>
+<td><code>%O</code></td>
+<td>Elapsed time in seconds since previous message</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<p>实例代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;spdlog/spdlog.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;spdlog/sinks/stdout_color_sinks.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;spdlog/sinks/rotating_file_sink.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">spdlog_test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 创建logger</span></span><br><span class="line">    <span class="keyword">auto</span> console_log = spdlog::<span class="built_in">stdout_color_mt</span>(<span class="string">&quot;DRScreen&quot;</span>);</span><br><span class="line">    <span class="keyword">auto</span> file_log   = spdlog::<span class="built_in">rotating_logger_mt</span>(<span class="string">&quot;DRFile&quot;</span>, <span class="string">&quot;Logs/DR.txt&quot;</span>, <span class="number">1024</span>*<span class="number">1024</span>*<span class="number">5</span>, <span class="number">3</span>);</span><br><span class="line">    <span class="comment">// 设置logger等级</span></span><br><span class="line">    console_log-&gt;<span class="built_in">set_level</span>(spdlog::level::debug);</span><br><span class="line">    file_log-&gt;<span class="built_in">set_level</span>(spdlog::level::debug);</span><br><span class="line">    <span class="comment">// 设置logger title</span></span><br><span class="line">    console_log-&gt;<span class="built_in">set_pattern</span>(<span class="string">&quot;[%Y/%m/%d %H:%M:%S.%e][%l][%s:%#] %v&quot;</span>);</span><br><span class="line">    file_log-&gt;<span class="built_in">set_pattern</span>(<span class="string">&quot;%v&quot;</span>);</span><br><span class="line">    <span class="comment">// 记录log</span></span><br><span class="line">    <span class="comment">// 打印到屏幕</span></span><br><span class="line">    <span class="built_in">SPDLOG_LOGGER_INFO</span>(console_log, <span class="string">&quot;hello, world&quot;</span>);</span><br><span class="line">    console_log-&gt;<span class="built_in">info</span>(<span class="string">&quot;hello, world&quot;</span>); <span class="comment">// 使用这种方式记录，不会打印行号等自定义信息</span></span><br><span class="line">    <span class="comment">// 输出到文件</span></span><br><span class="line">    file_log-&gt;<span class="built_in">info</span>(<span class="string">&quot;Time X Y Yaw&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">spdlog_test</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[2022/10/26 14:46:31.251][info][main.cpp:21] hello, world</span><br><span class="line">[2022/10/26 14:46:31.251][info][:] hello, world</span><br><span class="line">同时，在可执行文件同级目录下有,Logs/DR.txt文件，文件中的内容是：</span><br><span class="line">Time X Y Yaw</span><br></pre></td></tr></table></figure>
+
+<h1 id="yaml-cpp"><a href="#yaml-cpp" class="headerlink" title="yaml-cpp"></a>yaml-cpp</h1><h4 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h4><p>方法1：源码编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/jbeder/yaml-cpp.git</span><br><span class="line"><span class="built_in">cd</span> yaml-cpp</span><br><span class="line"><span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">cmake .. &amp;&amp; make -j8</span><br><span class="line"><span class="built_in">sudo</span> make install</span><br></pre></td></tr></table></figure>
+
+<p>方法2：msys2安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S mingw-w64-x86_64-yaml-cpp</span><br></pre></td></tr></table></figure>
+
+<p>cmakelist.txt如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(yaml-cpp REQUIRED)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;YAML_CPP_INCLUDE_DIR&#125;</span>)</span><br><span class="line"><span class="comment"># 或者用此方法include</span></span><br><span class="line"><span class="keyword">target_include_directories</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> PRIVATE <span class="variable">$&#123;YAML_CPP_INCLUDE_DIR&#125;</span>)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(node_name yaml-cpp)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/Eigen/" rel="tag"># Eigen</a>
+              <a href="/tags/spdlog/" rel="tag"># spdlog</a>
+              <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/" rel="tag"># 第三方库</a>
+              <a href="/tags/Protobuf/" rel="tag"># Protobuf</a>
+              <a href="/tags/yaml-cpp/" rel="tag"># yaml-cpp</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/01/gac/veh_test/" rel="prev" title="车辆测试">
+      <i class="fa fa-chevron-left"></i> 车辆测试
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/01/gac/use_funcs/" rel="next" title="GAC使用函数">
+      GAC使用函数 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Eigen%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">Eigen库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Eigen%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">1. Eigen的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%9F%A9%E9%98%B5%E5%92%8C%E5%90%91%E9%87%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">2. 矩阵和向量的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-%E5%88%9B%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.0.2.1.</span> <span class="nav-text">2.1 创建方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.0.2.2.</span> <span class="nav-text">2.2 初始化方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0-%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.0.0.2.3.</span> <span class="nav-text">2.3 获取元素 &amp;&amp; 大小</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-%E5%88%9B%E5%BB%BA%E7%89%B9%E5%AE%9A%E7%9A%84%E7%9F%A9%E9%98%B5"><span class="nav-number">1.0.0.2.4.</span> <span class="nav-text">2.4 创建特定的矩阵</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-%E7%9F%A9%E9%98%B5%E7%9A%84%E5%88%87%E7%89%87%E6%93%8D%E4%BD%9C"><span class="nav-number">1.0.0.2.5.</span> <span class="nav-text">2.5 矩阵的切片操作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E7%9F%A9%E9%98%B5%E5%92%8C%E5%90%91%E9%87%8F%E7%9A%84%E8%BF%90%E7%AE%97"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">3. 矩阵和向量的运算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97"><span class="nav-number">1.0.0.3.1.</span> <span class="nav-text">3.1 四则运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-%E5%90%91%E9%87%8F%E7%9A%84%E6%95%B0%E9%87%8F%E7%A7%AF%EF%BC%8C%E7%82%B9%E7%A7%AF%EF%BC%8C%E5%8F%89%E4%B9%98"><span class="nav-number">1.0.0.3.2.</span> <span class="nav-text">3.2 向量的数量积，点积，叉乘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-%E7%9F%A9%E9%98%B5%E6%9C%AC%E8%BA%AB%E8%BF%90%E7%AE%97"><span class="nav-number">1.0.0.3.3.</span> <span class="nav-text">3.3 矩阵本身运算</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Array"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">4. Array</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-Array%E7%9A%84%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97"><span class="nav-number">1.0.0.4.1.</span> <span class="nav-text">4.1 Array的四则运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C"><span class="nav-number">1.0.0.4.2.</span> <span class="nav-text">4.2 其他操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-Array%E5%92%8CMatrix%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.0.0.4.3.</span> <span class="nav-text">4.3 Array和Matrix之间的转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-STL%E5%AE%B9%E5%99%A8%E4%B8%8EEigen%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">5. STL容器与Eigen的转换</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Qt"><span class="nav-number">2.</span> <span class="nav-text">Qt</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-clion-Qt-IDE%E9%85%8D%E7%BD%AE"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">1. clion + Qt IDE配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">2. 安装常见问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Qt%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AF%AD%E6%B3%95"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">3. Qt的一些语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%A7%BD"><span class="nav-number">2.0.0.3.1.</span> <span class="nav-text">2.1 信号与槽</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1-1-%E9%92%88%E5%AF%B9%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0%E7%9A%84connect"><span class="nav-number">2.0.0.3.1.1.</span> <span class="nav-text">2.1.1 针对重载函数的connect</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Qt%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%93%E5%8C%85"><span class="nav-number">2.0.0.4.</span> <span class="nav-text">4. Qt程序的打包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-windows%E4%B8%8B%E7%9A%84%E6%89%93%E5%8C%85"><span class="nav-number">2.0.0.4.1.</span> <span class="nav-text">4.1 windows下的打包</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Protobuf"><span class="nav-number">3.</span> <span class="nav-text">Protobuf</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-protobuf%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">1. protobuf的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-protobuf%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">2. protobuf的使用</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ipopt-CppAD"><span class="nav-number">4.</span> <span class="nav-text">Ipopt&#x2F;CppAD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-ipopt%E5%AE%89%E8%A3%85"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">1. ipopt安装</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Abseil"><span class="nav-number">5.</span> <span class="nav-text">Abseil</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-abseil%E5%AE%89%E8%A3%85"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">1. abseil安装</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spdlog"><span class="nav-number">6.</span> <span class="nav-text">spdlog</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-spdlog%E5%AE%89%E8%A3%85"><span class="nav-number">6.0.0.1.</span> <span class="nav-text">1. spdlog安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">6.0.0.2.</span> <span class="nav-text">2.2 使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-spdlog%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84"><span class="nav-number">6.0.0.2.1.</span> <span class="nav-text">2.1 spdlog库基本架构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-spdlog%E7%9A%84%E6%97%A5%E5%BF%97%E7%AD%89%E7%BA%A7"><span class="nav-number">6.0.0.2.2.</span> <span class="nav-text">2.2 spdlog的日志等级</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-spdlog%E7%9A%84pattern%E8%AE%BE%E7%BD%AE"><span class="nav-number">6.0.0.2.3.</span> <span class="nav-text">2.3 spdlog的pattern设置</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#yaml-cpp"><span class="nav-number">7.</span> <span class="nav-text">yaml-cpp</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85"><span class="nav-number">7.0.0.1.</span> <span class="nav-text">1. 安装</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">胡云浩</p>
+  <div class="site-description" itemprop="description">记录生活，记录工作，记录学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">胡云浩</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

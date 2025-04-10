@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"longfei1995.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1 仓库的创建添加git的用户名和邮箱： git config --global user.name &quot;Your Name&quot; &amp;&amp; git config --global user.email &quot;email@example.com&quot; 初始化git仓库：git init 添加文件到git：git add &lt;filename&gt; 添加单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git笔记">
+<meta property="og:url" content="https://longfei1995.github.io/2024/01/01/other_tools/gitNote/index.html">
+<meta property="og:site_name" content="胡云浩的blog">
+<meta property="og:description" content="1 仓库的创建添加git的用户名和邮箱： git config --global user.name &quot;Your Name&quot; &amp;&amp; git config --global user.email &quot;email@example.com&quot; 初始化git仓库：git init 添加文件到git：git add &lt;filename&gt; 添加单">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-10T09:05:06.285Z">
+<meta property="article:author" content="胡云浩">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="仓库">
+<meta property="article:tag" content="创建">
+<meta property="article:tag" content="添加">
+<meta property="article:tag" content="提交">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://longfei1995.github.io/2024/01/01/other_tools/gitNote/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>git笔记 | 胡云浩的blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">胡云浩的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">日常笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://longfei1995.github.io/2024/01/01/other_tools/gitNote/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="胡云浩">
+      <meta itemprop="description" content="记录生活，记录工作，记录学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="胡云浩的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2024-01-01T00:00:00+08:00">2024-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-10 17:05:06" itemprop="dateModified" datetime="2025-04-10T17:05:06+08:00">2025-04-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="1-仓库的创建"><a href="#1-仓库的创建" class="headerlink" title="1 仓库的创建"></a>1 仓库的创建</h4><p>添加git的用户名和邮箱：<code> git config --global user.name &quot;Your Name&quot;</code> &amp;&amp; <code>git config --global user.email &quot;email@example.com&quot;</code></p>
+<p>初始化git仓库：<code>git init</code></p>
+<p>添加文件到git：<code>git add &lt;filename&gt; </code>添加单一文件</p>
+<p> <code>git add *.cpp</code>添加所有.cpp文件</p>
+<p> <code>git add .</code>（添加所有更改了的文件）</p>
+<p>提交到本地仓库：<code>git commit -m &quot;message&quot;</code></p>
+<p>查看仓库状态：<code>git status</code></p>
+<h5 id="1-1-添加-gitignore"><a href="#1-1-添加-gitignore" class="headerlink" title="1.1 添加.gitignore"></a>1.1 添加.gitignore</h5><p>创建<code>.gitignore</code>：如果不希望文件被git追踪的话，可以在根目录下（注意不是.git下）创建名为<code>.gitignore</code>的文件，文件的模板如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># dir </span><br><span class="line">/build # 忽略根目录下的build文件夹以及子文件夹中的文件</span><br><span class="line">build/  # 忽略所有目录下的build文件夹以及子文件夹</span><br><span class="line"></span><br><span class="line"># file </span><br><span class="line">config.ini #忽略所有目录下的config.ini文件</span><br><span class="line"></span><br><span class="line"># log </span><br><span class="line">/*.log # 忽略根目录下的所有尾缀为.log的文件</span><br><span class="line"></span><br><span class="line"># 忽略结尾为.o和.a的文件。</span><br><span class="line">*.[oa]</span><br></pre></td></tr></table></figure>
+
+<p>p.s:<code>*.[oa]</code>这种写法叫glob模式，具体介绍可见<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%AE%B0%E5%BD%95%E6%AF%8F%E6%AC%A1%E6%9B%B4%E6%96%B0%E5%88%B0%E4%BB%93%E5%BA%93">Git - 记录每次更新到仓库 (git-scm.com)</a></p>
+<p>如果文件已经被git追踪，还想要忽略的话，执行命令<code>git rm --cached &lt;file&gt;</code>或者<code>git rm -r --cached &lt;dir&gt;</code>来取消对文件或者文件夹的追踪。</p>
+<h5 id="1-2-添加-gitattributes"><a href="#1-2-添加-gitattributes" class="headerlink" title="1.2 添加.gitattributes"></a>1.2 添加.gitattributes</h5><p><code>.gitattributes</code>文件允许你指定文件和路径的属性，每当有文件保存或者创建时，git都会用指定的属性来保存这个文件。</p>
+<ul>
+<li>其中有个属性是<code>eol(end of line)</code>，用与配置文件的末尾行。比如<code>windows</code>上默认的末尾行是<code>回车换行(Carriage Return Line Feed,CRLF)</code>，而<code>linux/MacOS</code>上则是<code>换行(Line Feed, LF)</code>。</li>
+</ul>
+<p>那么如何添加这个属性呢，我们可以在根目录上创建<code>.gitattributes</code>文件，下面是该文件的样例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*.sh 	eol=lf</span><br><span class="line">*.json	eol=lf</span><br><span class="line">*.jsx	eol=lf</span><br></pre></td></tr></table></figure>
+
+<p>如果是新的git仓库，那么提交这个文件即可。如果是将<code>.gitattributes</code>添加到已有的git仓库，那么执行如下命令即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 将文件从暂存区中删除（仅仅从git跟踪单中删除该文件），磁盘上该文件还是存在</span><br><span class="line">git rm -r --cached .</span><br><span class="line">git reset --hard</span><br></pre></td></tr></table></figure>
+
+<p>上面的命令就会根据文件 <code>.gitattributes</code> 中的定义，更新文件的结尾行。</p>
+<h4 id="2-版本管理"><a href="#2-版本管理" class="headerlink" title="2 版本管理"></a>2 版本管理</h4><h5 id="2-1-reset到指定commit-id"><a href="#2-1-reset到指定commit-id" class="headerlink" title="2.1 reset到指定commit id"></a>2.1 reset到指定commit id</h5><p>共同的作用：都是将当前HEAD指针指向某个commit id。</p>
+<ul>
+<li><p>git reset –soft <commit-id></p>
+<p>将现在所有工作区和staged区的内容都放到staged区<br>适用场景：想合并几个 commit 或者 想修改最近的 commit 信息</p>
+</li>
+<li><p>git reset –mixed <commit-id></p>
+</li>
+<li><p>git reset –hard <commit-id></p>
+</li>
+</ul>
+<h5 id="2-3-远程仓库管理"><a href="#2-3-远程仓库管理" class="headerlink" title="2.3 远程仓库管理"></a>2.3 远程仓库管理</h5><p><strong>1.已有远程仓库</strong></p>
+<p>克隆远程仓库：<code>git clone &lt;仓库地址&gt;</code></p>
+<p>克隆远程仓库的指定分支：<code>git clone -b &lt;远程分支名&gt; &lt;仓库地址&gt;</code></p>
+<p>本地已经有远程仓库的一个分支，想要克隆其它分支：<code>git checkout -t &lt;远程分支名&gt;</code></p>
+<p> <strong>2.已有本地仓库</strong></p>
+<p>将本地仓库关联到远程仓库：<code>git remote add &lt;远程仓库名&gt; &lt;远程仓库地址&gt;</code>,例<code>git remote add gitee git@gitee.com:xx/xx</code></p>
+<p>建立本地分支和远程分支的联系：新版本<code>git branch --set-upstream-to=&lt;远程仓库名&gt;/&lt;远程分支名&gt; &lt;本地分支名&gt;</code>，旧版本<code>git branch --set-upstream &lt;本地分支名&gt; &lt;远程仓库名&gt;/&lt;远程分支名&gt;</code></p>
+<p>查看远程仓库信息：<code>git remote -v</code><br>将本地仓库推送到远程仓库origin的指定分支master：<code>git push origin master</code>，强制推送<code>git push -f origin master</code></p>
+<h4 id="3-git分支操作"><a href="#3-git分支操作" class="headerlink" title="3 git分支操作"></a>3 git分支操作</h4><h5 id="3-1-基础操作"><a href="#3-1-基础操作" class="headerlink" title="3.1 基础操作"></a>3.1 基础操作</h5><p><em>对于所有分支而言，工作区和暂存区都是公用的，所以在其它分支工作时，务必git add &amp;&amp; git commit，然后再进行分支切换操作</em></p>
+<p>查看分支：查看本地分支<code>git branch</code>，查看远程分支<code>git branch -r</code>，查看所有分支<code>git branch -a</code></p>
+<p>创建分支：<code>git branch &lt;branchName&gt;</code></p>
+<p>切换分支：老版本<code>git checkout &lt;branchName&gt;</code>，新版本<code>git switch &lt;branchName&gt;</code></p>
+<p>创建+切换分支：老版本<code>git checkout -b &lt;branchName&gt;</code>，新版本<code>git switch -c &lt;branchName&gt;</code></p>
+<p>从远端创建分支：<code>git switch -c &lt;name&gt; &lt;remote/name&gt;</code></p>
+<p>合并某分支到当前分支：在当前分支下，<code>git merge &lt;某分支名&gt;</code></p>
+<p>删除分支：<code>git branch -d &lt;name&gt;</code></p>
+<p>删除远端分支：<code>git push origin --delete &lt;远程分支名&gt;</code></p>
+<h5 id="3-2-进阶操作"><a href="#3-2-进阶操作" class="headerlink" title="3.2 进阶操作"></a>3.2 进阶操作</h5><p>保存当前分支的工作现场：<code>git stash</code></p>
+<p>恢复现场：先用<code>git stash list</code>查看保存的现场。然后用<code>git stash pop</code>恢复现场，或者用<code>git stash apply &lt;stash list中指定的内容&gt;</code></p>
+<p>复制特定的提交到当前分支：<code>git cherry-pick &lt;commit-id&gt;</code></p>
+<h5 id="3-3-多人如何协作开发"><a href="#3-3-多人如何协作开发" class="headerlink" title="3.3 多人如何协作开发"></a>3.3 多人如何协作开发</h5><p>多人协作的工作模式通常是这样：</p>
+<ol>
+<li>首先，可以试图用<code>git push origin &lt;branch-name&gt;</code>推送自己的修改；</li>
+<li>如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并；</li>
+<li>如果合并有冲突，则解决冲突，并在本地提交（git add &amp;&amp; git commit)；</li>
+<li>没有冲突或者解决掉冲突后，再用<code>git push origin &lt;branch-name&gt;</code>推送就能成功！</li>
+</ol>
+<h4 id="4-git分模块管理"><a href="#4-git分模块管理" class="headerlink" title="4 git分模块管理"></a>4 git分模块管理</h4><h5 id="4-1-库的克隆"><a href="#4-1-库的克隆" class="headerlink" title="4.1 库的克隆"></a>4.1 库的克隆</h5><p>方法1：</p>
+<ol>
+<li><p>先克隆主项目，<code>git clone &lt;父项目仓库地址&gt;</code></p>
+<p>ps:这个命令不会clone子仓库的文件，只会克隆<code>.gitmodule</code>描述文件，需要执行下面的命令拉取仓库文件。</p>
+</li>
+<li><p>然后在主项目根目录下执行<code>git submodule init</code>,初始化本地子项目的配置</p>
+</li>
+<li><p>最后拉取子项目的文件，<code>git submodule update</code>			ps:此命令后，子模块只是拉取的“主项目对子模块引用的那个HEAD”，如果想要子模块更新到子模块仓库的最新版本，还需要在子模块目录中执行<code>git pull origin master</code></p>
+</li>
+</ol>
+<p>方法2：</p>
+<p>克隆主项目时，递归拉取子项目代码，<code>git clone &lt;主项目url&gt; --recurse-submodules</code>。</p>
+<p>ps:这样拉取的子项目，只有子项目的文件夹，而没有子项目的具体代码。因此，还需分别进入各子项目文件夹，执行<code>git pull origin master</code></p>
+<h5 id="4-2-库的拉取和推送"><a href="#4-2-库的拉取和推送" class="headerlink" title="4.2 库的拉取和推送"></a>4.2 库的拉取和推送</h5><p>主项目的拉取和推送：和正常库一样即可</p>
+<p>子项目拉取：<strong>进入子项目文件夹中</strong>，<code>git pull origin master</code><br>子项目推送：<strong>进入子项目文件夹中</strong>，<code>git push origin HEAD:master</code>,ps:子模块push后，主项目对子模块的引用还没有更新，如果想更新的话。</p>
+<p>先<code>git add &lt;子模块文件夹名&gt;</code>，再<code>git commit -m &quot;msg&quot;</code>，然后<code>git push</code></p>
+<h5 id="4-3-创建子模块库"><a href="#4-3-创建子模块库" class="headerlink" title="4.3 创建子模块库"></a>4.3 创建子模块库</h5><p>先进入父仓库的目录下，执行命令<code>git submodule add &lt;子模块仓库地址&gt; &lt;本地路径&gt;</code></p>
+<p>其中本地路径是可选的，默认情况下，子模块会添加在当前目录下面。如果指定了路径，则会把子项目放到指定的本地路径下。执行上面命令后，父仓库的<code>.gitmodule</code>文件会添加如下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[submodule  仓库名称]</span><br><span class="line">    path = 仓库名称（或指定的本地路径）</span><br><span class="line">    url = 仓库地址</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-标签管理"><a href="#5-标签管理" class="headerlink" title="5 标签管理"></a>5 标签管理</h4><h5 id="5-1-简述"><a href="#5-1-简述" class="headerlink" title="5.1 简述"></a>5.1 简述</h5><p>tag的作用：在发布一个版本的时候，我们通常会在版本库中打一个标签(tag)，将来无论什么时候，我们可以取这个标签对应的历史版本。相当于版本库的快照，和commit id很像。</p>
+<p>tag的实质：其实它就是指向某个commit的指针（跟分支很像对不对？但是分支可以移动，标签不能移动），所以，创建和删除标签都是瞬间完成的。</p>
+<p>有了commit id后为什么还要tag?</p>
+<p>“请把上周一的那个版本打包发布，commit号是6a5819e…”</p>
+<p>“一串乱七八糟的数字不好找！”</p>
+<p>如果换一个办法：</p>
+<p>“请把上周一的那个版本打包发布，版本号是v1.2”</p>
+<p>“好的，按照tag v1.2查找commit就行！”</p>
+<p>所以，tag就是一个让人容易记住的有意义的名字，它跟某个commit绑在一起。</p>
+<h5 id="5-2-tag相关命令"><a href="#5-2-tag相关命令" class="headerlink" title="5.2 tag相关命令"></a>5.2 tag相关命令</h5><ul>
+<li>创建tag</li>
+</ul>
+<p>新建一个tag：<code>git tag &lt;tagname&gt;</code>用于新建一个标签，默认为<code>HEAD</code>，也可以指定一个commit id来给历史版本打tag <code>git tag &lt;tagname&gt; &lt;commit id&gt;</code></p>
+<p>新建一个带有标签信息的tag：<code>git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;</code>可以指定标签信息</p>
+<ul>
+<li>查看tag</li>
+</ul>
+<p>查看所有标签：<code>git tag</code></p>
+<p>查看指定标签的详细信息：<code>git show &lt;tagname&gt;</code></p>
+<ul>
+<li>删除tag</li>
+</ul>
+<p>删除本地tag：<code>git tag -d &lt;tagname&gt;</code></p>
+<p>删除远程tag，删除命令也是push：先删除本地tag，然后<code>git push origin :refs/tags/&lt;tagname&gt;</code></p>
+<ul>
+<li>推送tag</li>
+</ul>
+<p>推送一个tag：<code>git push origin &lt;tagname&gt;</code></p>
+<p>推送本地所有的tag：<code>git push origin --tags</code></p>
+<ul>
+<li>切换到指定的tag</li>
+</ul>
+<p>如果直接将当前的分支，切换到某个tag是不安全的，git会提示”detached HEAD”，也就是当前的HEAD指针移动到了tag分支处，有可能丢失tag之后的commit。</p>
+<p>我们可以新建一个基于某个tag的分支：<code>git switch -c &lt;branch name&gt; &lt;tagname&gt;</code>，操作完之后，将这个分支删除即可。</p>
+<h6 id=""><a href="#" class="headerlink" title=""></a></h6>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/%E4%BB%93%E5%BA%93/" rel="tag"># 仓库</a>
+              <a href="/tags/%E5%88%9B%E5%BB%BA/" rel="tag"># 创建</a>
+              <a href="/tags/%E6%B7%BB%E5%8A%A0/" rel="tag"># 添加</a>
+              <a href="/tags/%E6%8F%90%E4%BA%A4/" rel="tag"># 提交</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/01/IDE/vscode/vscode/" rel="next" title="vscode">
+      vscode <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%93%E5%BA%93%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">1 仓库的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-%E6%B7%BB%E5%8A%A0-gitignore"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 添加.gitignore</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-%E6%B7%BB%E5%8A%A0-gitattributes"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 添加.gitattributes</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">2 版本管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-reset%E5%88%B0%E6%8C%87%E5%AE%9Acommit-id"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 reset到指定commit id</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">2.3 远程仓库管理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-git%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">3 git分支操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 基础操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-%E8%BF%9B%E9%98%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 进阶操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-%E5%A4%9A%E4%BA%BA%E5%A6%82%E4%BD%95%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 多人如何协作开发</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-git%E5%88%86%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">4 git分模块管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-%E5%BA%93%E7%9A%84%E5%85%8B%E9%9A%86"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 库的克隆</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-%E5%BA%93%E7%9A%84%E6%8B%89%E5%8F%96%E5%92%8C%E6%8E%A8%E9%80%81"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 库的拉取和推送</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-%E5%88%9B%E5%BB%BA%E5%AD%90%E6%A8%A1%E5%9D%97%E5%BA%93"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 创建子模块库</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">5 标签管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-%E7%AE%80%E8%BF%B0"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 简述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-tag%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 tag相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link"><span class="nav-number">5.2.1.</span> <span class="nav-text"></span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">胡云浩</p>
+  <div class="site-description" itemprop="description">记录生活，记录工作，记录学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">胡云浩</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

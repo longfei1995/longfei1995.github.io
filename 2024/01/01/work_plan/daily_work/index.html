@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"longfei1995.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="工作计划2023年20230920230912-周二   查看仿真平台的软件为什么不能plan complete，为什么规划出路径虚拟车辆没有走  查看apa planning代码的A*部分  完成与专利局交流的apa规划算法的ppt  20230913-周三   查看apa planning算法  查看apa planning算法的文档  与决策、状态机一起实车初次联调  20230914-周四">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工作计划">
+<meta property="og:url" content="https://longfei1995.github.io/2024/01/01/work_plan/daily_work/index.html">
+<meta property="og:site_name" content="胡云浩的blog">
+<meta property="og:description" content="工作计划2023年20230920230912-周二   查看仿真平台的软件为什么不能plan complete，为什么规划出路径虚拟车辆没有走  查看apa planning代码的A*部分  完成与专利局交流的apa规划算法的ppt  20230913-周三   查看apa planning算法  查看apa planning算法的文档  与决策、状态机一起实车初次联调  20230914-周四">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-10T09:06:23.026Z">
+<meta property="article:author" content="胡云浩">
+<meta property="article:tag" content="记录">
+<meta property="article:tag" content="保存">
+<meta property="article:tag" content="工作计划">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://longfei1995.github.io/2024/01/01/work_plan/daily_work/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>工作计划 | 胡云浩的blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">胡云浩的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">日常笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://longfei1995.github.io/2024/01/01/work_plan/daily_work/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="胡云浩">
+      <meta itemprop="description" content="记录生活，记录工作，记录学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="胡云浩的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          工作计划
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2024-01-01T00:00:00+08:00">2024-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-10 17:06:23" itemprop="dateModified" datetime="2025-04-10T17:06:23+08:00">2025-04-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C%E8%AE%A1%E5%88%92/" itemprop="url" rel="index"><span itemprop="name">工作计划</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="工作计划"><a href="#工作计划" class="headerlink" title="工作计划"></a>工作计划</h3><h4 id="2023年"><a href="#2023年" class="headerlink" title="2023年"></a>2023年</h4><h5 id="202309"><a href="#202309" class="headerlink" title="202309"></a>202309</h5><p><em>20230912-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看仿真平台的软件为什么不能plan complete，为什么规划出路径虚拟车辆没有走</li>
+<li><input disabled="" type="checkbox"> 查看apa planning代码的A*部分</li>
+<li><input checked="" disabled="" type="checkbox"> 完成与专利局交流的apa规划算法的ppt</li>
+</ul>
+<p><em>20230913-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看apa planning算法</li>
+<li><input disabled="" type="checkbox"> 查看apa planning算法的文档</li>
+<li><input checked="" disabled="" type="checkbox"> 与决策、状态机一起实车初次联调</li>
+</ul>
+<p><em>20230914-周四</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 与握手、控制一起实车联调，打通下游链路</li>
+</ul>
+<p><em>20230918-周一</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 障碍物干涉之后往外推的逻辑</li>
+<li><input checked="" disabled="" type="checkbox"> 联调解决实车时决策给的DRreset有问题、slot_origin_in_map、定位跳变的问题</li>
+</ul>
+<p><em>20230919-周二</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 障碍物干涉往外推的逻辑</li>
+<li><input checked="" disabled="" type="checkbox"> 查看copy-assignment constructor的写法</li>
+<li><input checked="" disabled="" type="checkbox"> 重新看三五原则</li>
+<li><input checked="" disabled="" type="checkbox"> x9u实车调通的版本发版</li>
+</ul>
+<p><em>20230920-周三</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 障碍物干涉清空地图，并且重新前向，后向扫描</li>
+<li><input disabled="" type="checkbox"> 02 module看完</li>
+</ul>
+<p><em>20230921-周四</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 搭建公司电脑的环境</li>
+<li><input checked="" disabled="" type="checkbox"> adigo-builder会议</li>
+</ul>
+<p><em>20230922-周五</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 排查状态机与规划之间的通信问题</li>
+<li><input checked="" disabled="" type="checkbox"> 和仿真平台交流，为什么他们斜列车位停得有问题，应该给怎样的数据</li>
+</ul>
+<h5 id="202310"><a href="#202310" class="headerlink" title="202310"></a>202310</h5><p><em>20231011-周三</em></p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+和决策室王垚查看规划过程中，控制没有跟上，撞障碍物点的问题</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+* 修改x9u run脚本，添加Log文件的时间戳<br>* 合并BUILD_IN_QNX BUILD_LINUX_SIZE_T等功能一致的宏<br>* base.cpp中#includecollision_detection.h，防止类定义缺失</p>
+</li>
+</ul>
+<p><em>20231012-周四</em></p>
+<ul>
+<li><p><input disabled="" type="checkbox"> 
+1012发版前的测试，验证</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+解决仿真室遇到的问题：</p>
+<p>1.算法一直运行<br>2.当第一个场景运行完后，执行第二个场景时apa算法调不起来<br>3.原因是：第一个场景运行完后，算法一直在发Kover信号</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+回答专利科的提问</p>
+</li>
+</ul>
+<p><em>20231013-周五</em></p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+计算规划发送给A02泊车显示界面的参数：挡位、规划总距离、剩余总距离、单次泊车行驶剩余距离</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+根据泊车界面的要求，重算给决策的当前步数，总步数</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+规划发给决策的路点由当前控制跟踪的那条路 -&gt; 发送整个plan_path给决策</p>
+</li>
+</ul>
+<p><em>20231016-周一</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 看规划的代码</li>
+<li><input checked="" disabled="" type="checkbox"> 看规划的文档</li>
+</ul>
+<p><em>20231017-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> * 增加发送给决策的泊车界面显示的量<br>* 发送给控制的path_attribute名称的改变<br>* 订阅dr的topic name的改变</li>
+<li><input checked="" disabled="" type="checkbox"> 处理JIRA 1个</li>
+<li><input checked="" disabled="" type="checkbox"> 添加台架读取plan.yaml的仿真程序</li>
+</ul>
+<p><em>20231019-周四</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 查看3篇c++ 11的文章</li>
+<li><input disabled="" type="checkbox"> 查看规划相关的代码&amp;文档</li>
+<li><input checked="" disabled="" type="checkbox"> 配置Gerrit commit模板</li>
+<li><input checked="" disabled="" type="checkbox"> x9u固定发路径的台架测试版本释放</li>
+<li><input checked="" disabled="" type="checkbox"> 平行车位规划路径问题的排查</li>
+</ul>
+<p><em>20231020-周五</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 开发读取车型配置文件的yaml</li>
+</ul>
+<p><em>20231021-周六</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 排查014车规划和控制中间件周期的问题</li>
+<li><input checked="" disabled="" type="checkbox"> 部署016车idl1.4.3,发现执行件不能控车</li>
+</ul>
+<p><em>20231023-周一</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> CICD仿真测试链路：提供Harbor镜像+Gerrit</li>
+<li><input checked="" disabled="" type="checkbox"> JFrog集成发布artifact</li>
+</ul>
+<p><em>20231024-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 修改base.h里面的车型参数，将其改为#define + 函数类型</li>
+<li><input disabled="" type="checkbox"> 实车排查plan over不能成功置位，定位到dr 的veh_dir</li>
+</ul>
+<p><em>20231025-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 修复replay.yaml都记录在同一个文件的bug</li>
+<li><input checked="" disabled="" type="checkbox"> 修复发给decision num不自增的bug</li>
+</ul>
+<p><em>20231026-周四</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看vs code windows下不能build的原因，并且解决</li>
+<li><input disabled="" type="checkbox"> 查看如何将shell脚本的变量传递给cmakelist.txt</li>
+<li><input disabled="" type="checkbox"> 解决编译平台的问题</li>
+</ul>
+<p><em>20231027-周五</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 解决adigo_build编译平台的问题</li>
+</ul>
+<p><em>20231030-周一</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 试用codegeex和华为的代码ai</li>
+<li><input checked="" disabled="" type="checkbox"> 下载最新的clion，因为有license</li>
+</ul>
+<p><em>20231031-周二</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 确定车辆脱困的开发流程，修改完已经有的地图。</li>
+<li><input disabled="" type="checkbox"> deleteObs()前确定是否更新map</li>
+</ul>
+<h5 id="202311"><a href="#202311" class="headerlink" title="202311"></a>202311</h5><p><em>20231101-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 修改stop_dist，rm_path_len等的单位为cm</li>
+</ul>
+<p><em>20231107-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> printDebug切换成GACLOG</li>
+<li><input disabled="" type="checkbox"> 完成仿真平台调研.md</li>
+</ul>
+<p><em>20231108-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 解决名下的4个jira</li>
+<li><input disabled="" type="checkbox"> 汇总A02的所有和规划相关的JIRA问题</li>
+</ul>
+<p><em>20231109-周四</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 完成仿真平台的安装、试用、试用报告</li>
+<li><input disabled="" type="checkbox"> 开发避撞脱困的算法</li>
+</ul>
+<p><em>20231110-周五</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 脱困算法前期准备</li>
+</ul>
+<p><em>20231113-周一</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 完成各个轮廓圆与栅格点是否碰撞的template函数</li>
+<li><input checked="" disabled="" type="checkbox"> 完成各个轮廓圆与障碍物线段是否碰撞的template函数</li>
+</ul>
+<p><em>20231114-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 完成圆内障碍物的清除</li>
+<li><input disabled="" type="checkbox"> 将障碍物外推至高障碍物线段</li>
+<li><input checked="" disabled="" type="checkbox"> 和系统科讨论apa_plan单模块性能的提升方案，和仿真场景库，评价指标等</li>
+</ul>
+<p><em>20231115-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 将障碍物外推至高障碍物线段</li>
+<li><input checked="" disabled="" type="checkbox"> 完成JIRA问题的测试</li>
+</ul>
+<p><em>20231116-周四</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看为什么deleteObs()没有成功，并且解决此问题，完成交付</li>
+<li><input disabled="" type="checkbox"> 通过此次开发，深入查看代码的结构</li>
+</ul>
+<p><em>20231117-周五</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 添加新的成员，real_grid_map和real_tiny_grid_map</li>
+<li><input checked="" disabled="" type="checkbox"> 添加新的成员，real_high_obs_segs</li>
+<li><input checked="" disabled="" type="checkbox"> 原有的replay.yaml里面，仍然只记录之前的内容</li>
+</ul>
+<p><em>20231120-周一</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看两篇C++的特性</li>
+<li><input disabled="" type="checkbox"> 用gdb查看规划的整个流程</li>
+<li><input checked="" disabled="" type="checkbox"> 开调度平台的会议</li>
+</ul>
+<p><em>20231121-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 添加按”R”键，将当前的plan.yaml的车位，地图等反转。并记录到plan_reflect.yaml里</li>
+<li><input checked="" disabled="" type="checkbox"> 适配idl1.5</li>
+</ul>
+<p><em>20231122-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 添加is future bump未来三米的逻辑</li>
+<li><input checked="" disabled="" type="checkbox"> apa规划质量仿真会启动会</li>
+</ul>
+<p><em>20231127-周一</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 验证is future bump未来三米的逻辑</li>
+</ul>
+<p><em>20231128-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 验证is future bump未来三米的逻辑</li>
+<li><input checked="" disabled="" type="checkbox"> 修改path_index之类的无果</li>
+</ul>
+<p><em>20231129-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 在updateMaps里面，将grid map赋值给real grid map后生效，因为碰撞检测用的是real grid map</li>
+<li><input checked="" disabled="" type="checkbox"> 有一个新问题，栅格点不准，导致还是会撞水马，考虑多裁剪一点路径</li>
+</ul>
+<p><em>20231130-周四</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 根据平台的要求，添加version.sh </li>
+<li><input checked="" disabled="" type="checkbox"> 根据项目组的要求，订阅process state信号，pub 诊断信号和心跳信号</li>
+<li><input checked="" disabled="" type="checkbox"> 修改gaclog最大储存文件数为10，储存大小为10mb</li>
+<li><input disabled="" type="checkbox"> 验证裁剪之后的路径，是不是还是碰撞</li>
+</ul>
+<h5 id="202312"><a href="#202312" class="headerlink" title="202312"></a>202312</h5><p><em>20231205-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 将探测长度和裁剪长度写成配置文件，便于调试</li>
+<li><input disabled="" type="checkbox"> 查看3个JIRA路径失效 &amp;&amp; plan fail的原因</li>
+</ul>
+<p><em>20231206-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 开发避撞函数，查询某个点的最近障碍物的距离</li>
+<li><input disabled="" type="checkbox"> 修复is future bump中的检测方法，只检测当前的路径</li>
+</ul>
+<p><em>20231207-周四</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 试一下adigo-bag怎么使用</li>
+<li><input checked="" disabled="" type="checkbox"> 动态避撞现在只判断当前跟踪的路径</li>
+<li><input checked="" disabled="" type="checkbox"> 动态避撞的探测范围（3.0m）和截断距离（0.2m）仍可从config&#x2F;setting.yaml中修改</li>
+<li><input checked="" disabled="" type="checkbox"> 动态避撞在截短路径后，还是会持续检测截短后的路径，如有必要，会继续截短路径</li>
+<li><input checked="" disabled="" type="checkbox"> 给仿真发送新的实车场景</li>
+</ul>
+<p><em>20231208-周五</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看仿真张隆给的仿真测试报告</li>
+<li><input checked="" disabled="" type="checkbox"> 去掉ctrl error replan的条件中，veh_dir &#x3D;&#x3D; 0的条件</li>
+<li><input disabled="" type="checkbox"> 修改避撞重规划的条件，不再去判断ctrl_end_ok</li>
+</ul>
+<p><em>20231211-周一</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 填写年度绩效</li>
+<li><input checked="" disabled="" type="checkbox"> 修改ctrl error replan中的横纵向误差的计算方式</li>
+<li><input checked="" disabled="" type="checkbox"> 解决jira问题+1</li>
+</ul>
+<p><em>20231212-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 修改休眠方式为真休眠</li>
+<li><input checked="" disabled="" type="checkbox"> 查看调度框架的使用</li>
+<li><input checked="" disabled="" type="checkbox"> 查看printDebug的打印为何如此频繁</li>
+<li><input checked="" disabled="" type="checkbox"> 修改version.sh -&gt; ChangeLog.txt</li>
+</ul>
+<p><em>20231213-周三</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 适配调度框架</li>
+<li><input checked="" disabled="" type="checkbox"> 解决APILOT-1953 APILOT-1960 APILOT-1957 APILOT-1950 APILOT-1949</li>
+<li><input checked="" disabled="" type="checkbox"> 查看printDebug为啥时间错乱，查看规划周期是否稳定</li>
+<li><input checked="" disabled="" type="checkbox"> 解决isFutureBump() core dump的问题</li>
+</ul>
+<p><em>20231214-周四</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 修改communication的通信协议PROTOCOL_ZMQ_TCP-&gt;PROTOCOL_HYBRID</li>
+</ul>
+<p><em>20231215-周五</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 适配调度框架</li>
+<li><input checked="" disabled="" type="checkbox"> 解决JIRA 3个问题</li>
+</ul>
+<p><em>20231218-周一</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 分离调度框架和communication的逻辑</li>
+<li><input checked="" disabled="" type="checkbox"> 修改config.yaml，以便CI编译可以通过</li>
+</ul>
+<p><em>20231219-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> docker容器中加入调度框架的sdk，并且制成镜像</li>
+<li><input disabled="" type="checkbox"> 思考如何将现有逻辑加入调度框架</li>
+<li><input checked="" disabled="" type="checkbox"> 排查车辆跑飞的问题，查到是因为规划给控制的plan_path_id有误</li>
+</ul>
+<p><em>20231220-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 基于数据集的APA仿真开发的指标评价方案，场景搭建方案评审</li>
+<li><input checked="" disabled="" type="checkbox"> 解决动态规划失败后，车辆卡住的问题，是因为此时plan_path_id发给控制的值是0</li>
+<li><input checked="" disabled="" type="checkbox"> 发版前的build.yaml，config.yaml的修改</li>
+</ul>
+<p><em>20231221-周四</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 调度框架初版发布</li>
+<li><input checked="" disabled="" type="checkbox"> 查看调度框架自动代码生成表格的填写规范</li>
+<li><input checked="" disabled="" type="checkbox"> 走通由调度框架excel-&gt;代码</li>
+<li><input checked="" disabled="" type="checkbox"> 修改windows端的为clash机场</li>
+</ul>
+<p><em>20231225-周一</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 使用GDB查看规划主流程</li>
+<li><input checked="" disabled="" type="checkbox"> 查看规划相关的文档</li>
+</ul>
+<p><em>20231226-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 适配平台最新的sdkv1.2.0，制作docker镜像</li>
+<li><input checked="" disabled="" type="checkbox"> 解决JIRA 5个</li>
+</ul>
+<p><em>20231227-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 重新修改excel的结构，重新生成调度框架的代码架构</li>
+<li><input checked="" disabled="" type="checkbox"> 下午和梓龙一起测试动态避撞相关的内容</li>
+</ul>
+<p><em>20231228-周四</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 修改dynamic_bump中detect_path等的命名，同步更改config&#x2F;setting.yaml中的命名</li>
+<li><input checked="" disabled="" type="checkbox"> 更新x9u和x86的gaclog的头文件</li>
+<li><input checked="" disabled="" type="checkbox"> 排查决策AVM不显示的问题，因为std::vector<uint_8>长度越界的问题</li>
+</ul>
+<h4 id="2024年"><a href="#2024年" class="headerlink" title="2024年"></a>2024年</h4><h5 id="202401"><a href="#202401" class="headerlink" title="202401"></a>202401</h5><p><em>20240102-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> chatgpt和仿真的年终总结填写</li>
+<li><input checked="" disabled="" type="checkbox"> 解决挂名下的JIRA</li>
+<li><input disabled="" type="checkbox"> 排查程序奔溃的问题</li>
+</ul>
+<p><em>20240103-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 基于数据集的APA仿真</li>
+<li><input checked="" disabled="" type="checkbox"> 基于VS code修改调度框架的工程</li>
+</ul>
+<p><em>20240104-周四</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 完成调度框架的开发</li>
+<li><input checked="" disabled="" type="checkbox"> 解决仿真的JIRA问题 &amp;&amp; 和仿真的人讨论他们的碰撞检测是如何做的</li>
+<li><input checked="" disabled="" type="checkbox"> 告诉仿真该如何发车位角度</li>
+</ul>
+<p><em>20240105-周五</em></p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+开发限速模块：</p>
+</li>
+<li><p>将enum DirType挪到bash.h</p>
+</li>
+<li><p>完善doc&#x2F;collision*.md，在图上添加圆的索引</p>
+</li>
+<li><p>增加：getNearObsDisForSpdLimit(const Pose3f&amp; veh_pos, const DirType&amp; dir_type)查询指定车辆行驶方向的圆</p>
+</li>
+<li><p>增加：getNearObsDis(const Pose3f&amp; veh_pos, const std::vector<Circle4f>&amp; circles) 查询特定区域的圆</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+修改轮廓圆和障碍物地图，障碍物地图在前后项扫描的时候就输出距离，轮廓圆与safe_dist解耦</p>
+</li>
+<li><p>先修改障碍物距离地图，包括相关的注释</p>
+</li>
+<li><p>修改轮廓圆和safe dist耦合的部分</p>
+</li>
+</ul>
+<p><em>20240106-周六</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 处理吴院试驾的版本，被动挡轮杆的问题</li>
+</ul>
+<p><em>20240108-周一</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 开发QPlaner删除障碍物的功能</li>
+<li><input checked="" disabled="" type="checkbox"> 处理JIRA问题</li>
+<li><input checked="" disabled="" type="checkbox"> 出现多个提前plan over的问题，排查是终点更新提前 || DR给的位置已经到终点</li>
+<li><input checked="" disabled="" type="checkbox"> 完成泊车组工作周报的填写</li>
+</ul>
+<p><em>20240109-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 修改drawGrid()函数</li>
+<li><input checked="" disabled="" type="checkbox"> 开发QPlanPlayer的tools工具箱</li>
+</ul>
+<p><em>20240110-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 限速模块的测试</li>
+<li><input checked="" disabled="" type="checkbox"> 修改real_time_plan.cpp中isBump() &#x3D;&#x3D; true的bug</li>
+<li><input checked="" disabled="" type="checkbox"> 去除idl_node.cpp中的避撞等待控制换挡的功能</li>
+<li><input checked="" disabled="" type="checkbox"> 版本火车发版测试</li>
+<li><input checked="" disabled="" type="checkbox"> 避撞模块的评审</li>
+</ul>
+<p><em>20240111-周四</em></p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+适配idl 1.6</p>
+<ol>
+<li>data attribute不再分发chassis_state和uss_perception。重新从Comm idl里面去订阅</li>
+<li>发布给决策的数据reserved从uint8-&gt;uint16</li>
+</ol>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+修复drawGrid() x9u编译报错的bug</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+生成动态避撞的场景 &amp;&amp; gif</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+查找deleteObs()不生效的原因</p>
+</li>
+</ul>
+<p><em>20240112周五</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 修改限速模块的参数， 亚运城&amp;&amp;小镇标定限速模块的参数</li>
+<li><input disabled="" type="checkbox"> 查找规划core dump的问题</li>
+</ul>
+<p><em>20240115周一</em></p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+解决周末测试的JIRA</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+idl1.6发版</p>
+</li>
+<li><p><input disabled="" type="checkbox"> 
+调度框架初步测试</p>
+</li>
+</ul>
+<p><em>20240116周二</em></p>
+<ul>
+<li><p><input disabled="" type="checkbox"> 
+修改高低障碍物线段std::vector&lt;std::vector&lt;&gt;&gt; -&gt; std::vector&lt;&gt;<br>* 修改障碍物线段插值函数<br>* 修改高低障碍物碰撞判断函数</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+更新平台的communication.json。避免中间件挂掉</p>
+</li>
+</ul>
+<p><em>20240117-周三</em></p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+根据仿真室的要求，切换CI编译为项目线CI。新增x86下的build.yaml。修改config.yaml</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+isBump（）函数的逻辑调整</p>
+<ul>
+<li>先检测前&#x2F;后 大圆，如果碰撞了，再按顺序检测大圆内的小圆</li>
+<li>再检测所有后视镜圆</li>
+<li>再检测所有中圆</li>
+<li>再检测高障碍物线段</li>
+<li>再检测低障碍物线段</li>
+<li>调整低障碍物线段中间圆的位置，调整到核心区域正中</li>
+<li>低障碍物圆和后视镜一样，不再额外加上安全距离进行判断</li>
+</ul>
+</li>
+</ul>
+<p><em>20240118-周四</em></p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+开发getNearObsDis()函数</p>
+<ul>
+<li>用getNearHighObsDis(const Circle&amp;)获取轮廓圆与高障碍类型点的距离</li>
+<li>用getNearLowObsDis(const Circle&amp;)获取轮廓圆与低障碍物类型点的距离</li>
+<li>统一getNearObsDisForSpdLimit()的风格</li>
+</ul>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+处理JIRA问题</p>
+</li>
+</ul>
+<p><em>20240119-周五</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 添加virtual_obs_segs<ul>
+<li>ParkData中添加virtual_obs_segs，并且在init()中初始化</li>
+<li>ParkType中添加kTightTailIn &#x3D; 7</li>
+<li>如果park_data有virtual_obs_segs，那么在free_space.updateMap()中插值，并且更新到park_data.real_grid_map</li>
+</ul>
+</li>
+</ul>
+<p><em>20240122-周一</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> setting.yaml中加入螺旋线速度相关的参数 &amp;&amp; 程序里也加相应的逻辑</li>
+</ul>
+<p><em>20240123-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看udp通信时阻塞的问题，重写upd通信这一块的代码</li>
+</ul>
+<p><em>20240124-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 更新发版的changlog.txt</li>
+<li><input checked="" disabled="" type="checkbox"> 解决JIRA问题</li>
+</ul>
+<p><em>20240125-周四</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 写完windows下UDP通信封装<code>UDPSocket</code></li>
+</ul>
+<p><em>20240126-周五</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 写完linux下的UDP通信的封装</li>
+<li><input checked="" disabled="" type="checkbox"> 解决车辆限速的问题，调整车辆的速度</li>
+</ul>
+<p>*20240129-周一</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 修复isBump()和getNearObsDis()相互冲突的问题</li>
+<li><input checked="" disabled="" type="checkbox"> 查找path_gear()core dump的原因</li>
+<li><input checked="" disabled="" type="checkbox"> * deleteObs()添加清除后视镜里的栅格点<ul>
+<li>仿照clearGridInCircle()新建clearLowObsInCircle()，用于清除与低障碍物圆干涉的低障碍物线段</li>
+</ul>
+</li>
+</ul>
+<h5 id="202402"><a href="#202402" class="headerlink" title="202402"></a>202402</h5><p><em>20240201-周四</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 解决getNearObsDist受isBump影响的问题</li>
+<li><input checked="" disabled="" type="checkbox"> 解决没有pub_msg.clear()导致决策&amp;&amp;状态机core dump的问题</li>
+<li><input checked="" disabled="" type="checkbox"> 解决bash.cpp 速度规划时，plan_path.back()越界，导致的core dump问题</li>
+</ul>
+<p><em>20240202-周五</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看setting.yaml不生效的问题</li>
+<li><input checked="" disabled="" type="checkbox"> 排查JIRA问题</li>
+</ul>
+<p><em>20240204-周日</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查找碰撞圆设计中，大圆无法覆盖小圆的问题 &amp;&amp; 解决，将前后大圆半径+0.1m</li>
+<li><input checked="" disabled="" type="checkbox"> QPlan工具test harness &amp;&amp; benchmark</li>
+</ul>
+<p><em>20240220-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 解决jira APOUTER-146 APILOT-2775</li>
+<li><input disabled="" type="checkbox"> 写文档，“当前仿真平台和QPlanPlayer相比，需要做什么工作”<ol>
+<li>当前仿真平台有哪些方面不太完善的</li>
+<li>QPlanPlayer能做哪些方面的仿真</li>
+<li>提需求</li>
+</ol>
+</li>
+</ul>
+<p><em>20240222-周四</em></p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+完成pushObs()函数</p>
+<ul>
+<li>collision.h中添加delete_low_obs_sets,delete_high_obs_sets成员，用于储存障碍物与车身轮廓相干涉的点<br>* 新增clearHighObsInCircle()用于清除高障碍物线段与车的干涉部分<br>* 新增pushObs()用于处理delete_low&#x2F;high_obs_sets_<br>* 新增Collision::rotateCircle()用于对轮廓圆的旋转平移<br>* 更新noter.cpp</li>
+</ul>
+</li>
+</ul>
+<p><em>20240223-周五</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 解决APILOT-2855 2869 2865等JIRA</li>
+<li><input checked="" disabled="" type="checkbox"> 看书时间：effective c++</li>
+</ul>
+<p><em>20240226-周一</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 使用DockerFile构建plat form 1.3.0的镜像，便于维护和缩小docker image的容积</li>
+</ul>
+<p><em>20240227-周二</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 适配comunication v1.3.0<ul>
+<li>*Type_Support的命名空间不再有::protobuf，代码中做相应的命名空间修改</li>
+<li>*Type_Support::MsgType 后缀中加上了Bolemsg，代码中做相应的修改</li>
+<li>*Type_Support中的clear()函数更名为Clear()，代码中做相应的修改</li>
+<li>*Type_Support中path_attritube()函数以前返回类成员的指针，现在返回const&amp;，代码中做相应的修改</li>
+<li>x9u&#x2F;build.sh &amp;&amp; CMakeList.txt 切换到v1.3.0</li>
+</ul>
+</li>
+</ul>
+<p><em>20240228-周三</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 适配idl 1.8</li>
+</ul>
+<p><em>20240229</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 调度框架修改excel，重新改善调度框架的逻辑</li>
+<li><input checked="" disabled="" type="checkbox"> 调度框架适配idl1.8 &amp;&amp; sdk1.3.0<ul>
+<li>先重新从execel生成代码</li>
+<li>将已有的代码替换进去</li>
+<li>更新CMakeList.txt等为1.3.0</li>
+<li>再统一更新一下算法</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> 解决JIRA，记得看<a target="_blank" rel="noopener" href="http://139.159.231.223:8088/browse/APILOT-2222">APILOT-2222</a>的结论（HMI轨迹线闪烁）</li>
+<li><input disabled="" type="checkbox"> 记得看<a target="_blank" rel="noopener" href="http://139.159.231.223:8088/browse/APILOT-2910">APILOT-2910</a>的结论（避撞时未摆正车身）</li>
+</ul>
+<h5 id="202403"><a href="#202403" class="headerlink" title="202403"></a>202403</h5><p><em>20240304</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 甩头专项汇报文档</li>
+<li><input checked="" disabled="" type="checkbox"> 根据专利局的答复，重绘专利文档里面的图片的格式</li>
+</ul>
+<p><em>20240305</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 每次写replay.yaml时都写一次version.yaml &amp;&amp;<br>调度框架中printDebug()也使用getString()简化输出</li>
+</ul>
+<p><em>20240306</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 将心跳和诊断放到另一个线程里 </li>
+<li><input checked="" disabled="" type="checkbox"> 将心跳和诊断修改为100ms</li>
+</ul>
+<p><em>20240307</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> JIRA迁移前解决所有珠峰计划名下的JIRA</li>
+<li><input checked="" disabled="" type="checkbox"> plan.cpp中存储数据，然后用python matplotlib画出来</li>
+</ul>
+<p><em>20240311</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 写完飞书文档《规控室C++单元测试流程》</li>
+</ul>
+<p><em>20240312</em></p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+core dump分析</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+泊出调试</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+isFuturePathBump 变成立即重规划</p>
+<p>* replan_type 增加: 未来车辆位置碰撞<br>* 规划更新类型: 新增: 未来车辆位置碰撞，请求刹停后重规划<br>* 规划更新类型: 更新: 未来路径碰撞，立即重规划</p>
+</li>
+</ul>
+<p><em>20240313</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 动态规划时采用预测位置作为规划起点</li>
+</ul>
+<p><em>20240320</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 机械车位修改一下终点的位置</li>
+<li><input disabled="" type="checkbox"> 和感知联调库内障碍物</li>
+</ul>
+<p><em>20240321</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> APOUTER-1750 评论已更新，对于低障碍物点，不执行 pushObs 而是直接删除</li>
+<li><input disabled="" type="checkbox"> APOUTER-1924 观看一下这个评论</li>
+</ul>
+<p><em>20240322</em></p>
+<ul>
+<li><p><input disabled="" type="checkbox"> 
+车辆无法移动相关的JIRA：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://139.159.231.223:8088/browse/APOUTER-1967">APOUTER-1967</a> </li>
+<li><a target="_blank" rel="noopener" href="http://139.159.231.223:8088/browse/APOUTER-1955">APOUTER-1955</a></li>
+<li><a target="_blank" rel="noopener" href="http://139.159.231.223:8088/browse/APOUTER-1928">APOUTER-1928</a></li>
+<li><a target="_blank" rel="noopener" href="http://139.159.231.223:8088/browse/APOUTER-2039">APOUTER-2039</a></li>
+</ul>
+</li>
+<li><p><input disabled="" type="checkbox"> 
+同步计算上一次曲率 &amp;&amp; park_data_.curv &#x3D; park_data_rx.curv到调度框架</p>
+</li>
+</ul>
+<p><em>20240323</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看JIRA</li>
+<li><input checked="" disabled="" type="checkbox"> 对标M9</li>
+<li><input checked="" disabled="" type="checkbox"> 查看此JIRA评论APOUTER-2029</li>
+</ul>
+<p><em>20240325</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 调度框架无法完整泊车的排查，原因是平台的启动脚本有问题，已经修改</li>
+<li><input disabled="" type="checkbox"> 查看此JIRA评论APOUTER-2088，规划路径不合理</li>
+<li><input checked="" disabled="" type="checkbox"> 机械车位测试 &amp;&amp; 问题排查</li>
+</ul>
+<p><em>20240326</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看车辆无法移动 &amp;&amp; 规划路径不合理的JIRA</li>
+<li><input checked="" disabled="" type="checkbox"> 发版前的测试</li>
+<li><input checked="" disabled="" type="checkbox"> reset id a9205991</li>
+</ul>
+<p><em>20240328</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 更新communication和调度框架的gaclog版本为1.1.2</li>
+<li><input checked="" disabled="" type="checkbox"> 更新communication和调度框架的sdk 1.3.0 -&gt; 1.3.1</li>
+</ul>
+<h5 id="202404"><a href="#202404" class="headerlink" title="202404"></a>202404</h5><p><em>20240408</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看水平空间受限等14个JIRA</li>
+<li><input disabled="" type="checkbox"> 行人避让策略的开发</li>
+</ul>
+<p><em>20240410</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> CollisionDetection::pushObs: 轮廓圆膨胀 0.2 &#x3D;&gt; 0.12, 解决pushObs()函数内的一个bug</li>
+<li><input checked="" disabled="" type="checkbox"> 查看水平车位受限的原因</li>
+</ul>
+<p><em>20240418</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 水平 &amp;&amp; 斜列库内障碍物更新</li>
+<li><input checked="" disabled="" type="checkbox"> 解决JIRA问题</li>
+<li><input checked="" disabled="" type="checkbox"> 火焰图工具输出</li>
+</ul>
+<p><em>20240422</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 设置一个缓存队列，同时储存replan_flag &amp;&amp; veh_goal_pos。现在决策发replan flag只发一帧，如果此时规划正处于主流程中，回调中的这个replan_flag可能会被忽略掉。导致即使veh_goal_pos更新了，但是replan_flag &#x3D;&#x3D; 0。如果过程中没有其他重规划的话，只会在zero_remain_replan时使用新终点，此时plan over的阈值可能会覆盖新终点的更新，导致车头突出之类的问题。</li>
+<li><input checked="" disabled="" type="checkbox"> 解决JIRA问题7个</li>
+<li><input checked="" disabled="" type="checkbox"> 修改水平单侧腾挪障碍物的阈值 &amp;&amp; 限制</li>
+</ul>
+<p><em>20240423</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 动态障碍物策略</li>
+</ul>
+<h5 id="202405"><a href="#202405" class="headerlink" title="202405"></a>202405</h5><p><em>20240513</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 终点腾挪增加一个探测点，保证场景识别准确</li>
+<li><input checked="" disabled="" type="checkbox"> 查看APOUTER-3608，移动障碍物策略</li>
+<li><input disabled="" type="checkbox"> 查看APOUTER-3864</li>
+</ul>
+<p><em>20240520</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 4155  规划出来的路径新路径isFuturePosBump()检查中veh_curr_pos不通过，会触发kFuturePosReplan。RePlan后的新路径又会veh_curr_pos不通过。如此往复，直到超时车辆无法移动</li>
+<li><input disabled="" type="checkbox"> 4160 规划出来的路径很奇怪，有三段路径，但是每段路径只有两个点，而且规划路径离终点很远</li>
+</ul>
+<p><em>20240521</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 参数部分已经完成 veh_param* config&#x2F;setting.yaml</li>
+<li><input checked="" disabled="" type="checkbox"> updateParkData完成，新设计的updateParkData无论规划是否被更新都会被调用</li>
+</ul>
+<p><em>20240522</em></p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+4183和4219 可以在台架播包看一下情况，车辆无法移动的case</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+完成getNearDynamicObsDist(veh_pos, dir_type, vector<DynamicObs> dynamic_obs_list)<br>getDynamicObsDist(veh_pos, dir_type, dynamic_obs) </p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+checkDynamicObs(dynamic_obs_list)</p>
+</li>
+</ul>
+<h5 id="202406"><a href="#202406" class="headerlink" title="202406"></a>202406</h5><p><em>20240620</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 适配idl2.4.1，屏蔽generated的内容</li>
+</ul>
+<h5 id="202408"><a href="#202408" class="headerlink" title="202408"></a>202408</h5><p><em>20240812</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 完成sdk1.8.1的适配</li>
+<li><input disabled="" type="checkbox"> 播包回放feature分支，debug</li>
+<li><input checked="" disabled="" type="checkbox"> 解决名下jira问题</li>
+<li><input disabled="" type="checkbox"> em planner查看</li>
+</ul>
+<h5 id="202410"><a href="#202410" class="headerlink" title="202410"></a>202410</h5><p><em>20241014</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 完成cursor的适配和体验</li>
+<li><input checked="" disabled="" type="checkbox"> 用cursor看apollo的代码，对照讲解看</li>
+</ul>
+<p><em>20241021</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 查看时空联合论文spatio-temporal joint planning method</li>
+<li><input checked="" disabled="" type="checkbox"> 排查莫名截停的问题</li>
+</ul>
+<h5 id="202412"><a href="#202412" class="headerlink" title="202412"></a>202412</h5><p><em>20241202</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 实现时空联合论文spatio-temporal 的算法部分，并且在可视化展示出来</li>
+<li><input checked="" disabled="" type="checkbox"> 查看epsilon论文</li>
+</ul>
+<p><em>20241203</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 继续昨天的工作，今天看完这篇论文</li>
+<li><input disabled="" type="checkbox"> 查看Hello算法第4章，数组与链表。先速读，不要精读。</li>
+<li><input checked="" disabled="" type="checkbox"> 被JIRA困住，回了一天JIRA</li>
+</ul>
+<p><em>20241204</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看Hello算法第4章，数组与链表。先速读，不要精读。</li>
+</ul>
+<p><em>20241205</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 上午安装并体验了nuplan数据集</li>
+</ul>
+<p><em>20241206</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 修改了碰撞时也尝试使用历史路径</li>
+<li><input checked="" disabled="" type="checkbox"> getPathCost()增加螺旋线和dcurv的惩罚</li>
+<li><input checked="" disabled="" type="checkbox"> 新增菱形场景判断</li>
+</ul>
+<p><em>20241210</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 成功的基于nuplan数据集实现简单的CV预测模型</li>
+</ul>
+<p><em>20241211</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 查看其他预测模型</li>
+<li><input checked="" disabled="" type="checkbox"> 被JIRA拖住</li>
+</ul>
+<p><em>20241212</em></p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+查看第二章其他预测模型</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+今日论文：End-to-end Autonomous Driving:Challenges and Frontiers</p>
+</li>
+</ul>
+<p><em>20241217</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 查看JIRA</li>
+<li><input checked="" disabled="" type="checkbox"> Decision::checkFuturePathRisk时对当前路径和未来路径进行路径擦除时，不删除之前走过的路径，不将ctrl_seg_idx赋为1</li>
+</ul>
+<p><em>20241218</em></p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 实车测试昨天的改动 &amp;&amp; 发版前测试</li>
+<li><input checked="" disabled="" type="checkbox"> 今日论文：End-to-end 综述</li>
+</ul>
+<p><em>20241225</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 今日论文：</li>
+<li><input disabled="" type="checkbox"> 第二章看完</li>
+<li><input disabled="" type="checkbox"> 基于SVM的手工特征的变道的实验</li>
+</ul>
+<h4 id="2025"><a href="#2025" class="headerlink" title="2025"></a>2025</h4><h5 id="202502"><a href="#202502" class="headerlink" title="202502"></a>202502</h5><p><em>20250208</em></p>
+<ul>
+<li><input disabled="" type="checkbox"> 复习第二章的内容</li>
+<li><input disabled="" type="checkbox"> 查看github算法</li>
+<li><input disabled="" type="checkbox"> </li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag"># 记录</a>
+              <a href="/tags/%E4%BF%9D%E5%AD%98/" rel="tag"># 保存</a>
+              <a href="/tags/%E5%B7%A5%E4%BD%9C%E8%AE%A1%E5%88%92/" rel="tag"># 工作计划</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/01/self_driving/self-drivingNote%20/" rel="prev" title="自动驾驶控制算法">
+      <i class="fa fa-chevron-left"></i> 自动驾驶控制算法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/01/other_tools/windows/" rel="next" title="Windows">
+      Windows <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E8%AE%A1%E5%88%92"><span class="nav-number">1.</span> <span class="nav-text">工作计划</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2023%E5%B9%B4"><span class="nav-number">1.1.</span> <span class="nav-text">2023年</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#202309"><span class="nav-number">1.1.1.</span> <span class="nav-text">202309</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#202310"><span class="nav-number">1.1.2.</span> <span class="nav-text">202310</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#202311"><span class="nav-number">1.1.3.</span> <span class="nav-text">202311</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#202312"><span class="nav-number">1.1.4.</span> <span class="nav-text">202312</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2024%E5%B9%B4"><span class="nav-number">1.2.</span> <span class="nav-text">2024年</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#202401"><span class="nav-number">1.2.1.</span> <span class="nav-text">202401</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#202402"><span class="nav-number">1.2.2.</span> <span class="nav-text">202402</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#202403"><span class="nav-number">1.2.3.</span> <span class="nav-text">202403</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#202404"><span class="nav-number">1.2.4.</span> <span class="nav-text">202404</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#202405"><span class="nav-number">1.2.5.</span> <span class="nav-text">202405</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#202406"><span class="nav-number">1.2.6.</span> <span class="nav-text">202406</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#202408"><span class="nav-number">1.2.7.</span> <span class="nav-text">202408</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#202410"><span class="nav-number">1.2.8.</span> <span class="nav-text">202410</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#202412"><span class="nav-number">1.2.9.</span> <span class="nav-text">202412</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2025"><span class="nav-number">1.3.</span> <span class="nav-text">2025</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#202502"><span class="nav-number">1.3.1.</span> <span class="nav-text">202502</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">胡云浩</p>
+  <div class="site-description" itemprop="description">记录生活，记录工作，记录学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">胡云浩</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

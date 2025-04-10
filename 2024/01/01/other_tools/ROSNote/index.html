@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"longfei1995.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="ROS11 ROS安装中的常见问题1.1 sudo rosdep init出现错误 sudo rosdep init时出现“sudo: rosdep:command not found”  1.执行命令sudo apt install rospack-tools 2.然后重新运行sudo rosdep init即可 1.2 rosdep update报错报错信息：  sudo rosdep ini">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ROS笔记">
+<meta property="og:url" content="https://longfei1995.github.io/2024/01/01/other_tools/ROSNote/index.html">
+<meta property="og:site_name" content="胡云浩的blog">
+<meta property="og:description" content="ROS11 ROS安装中的常见问题1.1 sudo rosdep init出现错误 sudo rosdep init时出现“sudo: rosdep:command not found”  1.执行命令sudo apt install rospack-tools 2.然后重新运行sudo rosdep init即可 1.2 rosdep update报错报错信息：  sudo rosdep ini">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://longfei1995.github.io/images/tool_1.png">
+<meta property="og:image" content="https://longfei1995.github.io/images/useful2.PNG">
+<meta property="og:image" content="https://longfei1995.github.io/images/image-20220614142556029.png">
+<meta property="og:image" content="https://longfei1995.github.io/images/image-20220616083221186.png">
+<meta property="og:image" content="https://longfei1995.github.io/2024/01/01/other_tools/ROSNote/images/image-20220614154634790.png">
+<meta property="og:image" content="https://longfei1995.github.io/2024/01/01/other_tools/ROSNote/images/image-20220616091047952.png">
+<meta property="og:image" content="https://longfei1995.github.io/2024/01/01/other_tools/ROSNote/images/image-20220617103456728.png">
+<meta property="og:image" content="https://longfei1995.github.io/2024/01/01/other_tools/ROSNote/images/image-20220616093353442.png">
+<meta property="article:published_time" content="2023-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-10T09:05:12.091Z">
+<meta property="article:author" content="胡云浩">
+<meta property="article:tag" content="安装">
+<meta property="article:tag" content="ROS">
+<meta property="article:tag" content="使用">
+<meta property="article:tag" content="命令">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://longfei1995.github.io/images/tool_1.png">
+
+<link rel="canonical" href="https://longfei1995.github.io/2024/01/01/other_tools/ROSNote/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ROS笔记 | 胡云浩的blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">胡云浩的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">日常笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://longfei1995.github.io/2024/01/01/other_tools/ROSNote/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="胡云浩">
+      <meta itemprop="description" content="记录生活，记录工作，记录学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="胡云浩的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ROS笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2024-01-01T00:00:00+08:00">2024-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-10 17:05:12" itemprop="dateModified" datetime="2025-04-10T17:05:12+08:00">2025-04-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ROS/" itemprop="url" rel="index"><span itemprop="name">ROS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="ROS1"><a href="#ROS1" class="headerlink" title="ROS1"></a>ROS1</h3><h4 id="1-ROS安装中的常见问题"><a href="#1-ROS安装中的常见问题" class="headerlink" title="1 ROS安装中的常见问题"></a>1 ROS安装中的常见问题</h4><h5 id="1-1-sudo-rosdep-init出现错误"><a href="#1-1-sudo-rosdep-init出现错误" class="headerlink" title="1.1 sudo rosdep init出现错误"></a>1.1 sudo rosdep init出现错误</h5><blockquote>
+<p>sudo rosdep init时出现“sudo: rosdep:command not found”</p>
+</blockquote>
+<p>1.执行命令<code>sudo apt install rospack-tools</code></p>
+<p>2.然后重新运行<code>sudo rosdep init</code>即可</p>
+<h5 id="1-2-rosdep-update报错"><a href="#1-2-rosdep-update报错" class="headerlink" title="1.2 rosdep update报错"></a>1.2 rosdep update报错</h5><p><strong>报错信息</strong>：</p>
+<blockquote>
+<p>sudo rosdep init时出现“ERROR: cannot download default sources list from:<br><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/sources.list.d/20-default.list">https://raw.githubusercontent.com/ros/rosdistro/master/rosdep/sources.list.d/20-default.list</a><br>Website may be down.</p>
+</blockquote>
+<p><strong>报错原因</strong>：</p>
+<p>境外资源被屏蔽</p>
+<p><strong>解决方法1</strong>：修改hosts文件</p>
+<p>1.首先进入&#x2F;etc，更改hosts文件的权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> gedit /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<p>2.打开hosts文件后，在文件末尾添加以下内容，并保存退出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">151.101.84.133  raw.githubusercontent.com</span><br></pre></td></tr></table></figure>
+
+<p>3.如果执行第二步后还是不行，如果还不行，在IPAddress网站中（<a target="_blank" rel="noopener" href="https://www.ipaddress.com),输入raw.githubusercontent.com查询到网址真实的ip地址,替换步骤2中提到的ip/">https://www.ipaddress.com）,输入raw.githubusercontent.com查询到网址真实的IP地址，替换步骤2中提到的IP</a></p>
+<p><strong>解决方法2：用国内的rosdep镜像源</strong></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/VGs8oWdhHH6XsHcx21lN4Q">https://mp.weixin.qq.com/s/VGs8oWdhHH6XsHcx21lN4Q</a></p>
+<p>1.安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pip install rosdepc 或者 <span class="built_in">sudo</span> pip3 install rosdepc</span><br><span class="line"><span class="comment"># 如果提示没有pip或者pip3</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install python3-pip </span><br><span class="line"><span class="built_in">sudo</span> pip install rosdepc</span><br></pre></td></tr></table></figure>
+
+<p>2.使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> rosdepc init</span><br><span class="line">rosdepc update</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-ROS1的使用"><a href="#2-ROS1的使用" class="headerlink" title="2 ROS1的使用"></a>2 ROS1的使用</h4><h5 id="2-1-创建并初始化catkin工作空间"><a href="#2-1-创建并初始化catkin工作空间" class="headerlink" title="2.1 创建并初始化catkin工作空间"></a>2.1 创建并初始化catkin工作空间</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ./catkin_ws/src	<span class="comment"># 在当前文件夹下创建二层文件夹 catkin_ws/src</span></span><br><span class="line">							<span class="comment"># src文件夹是放置ros源码包的地方</span></span><br><span class="line"><span class="built_in">cd</span> catkin_ws/			    <span class="comment"># 进入catkin_ws</span></span><br><span class="line">catkin_make 				<span class="comment"># 初始化工作空间,注意该命令必须在catkin工作空间目录下执行</span></span><br><span class="line">							<span class="comment"># 原先的初始化命令catkin_init_workspace命令仍然保留</span></span><br></pre></td></tr></table></figure>
+
+<p>catkin_ws文件夹下现在有三个文件夹，编译时的工作流程如下图所示</p>
+<p><img src="/images/tool_1.png"></p>
+<ul>
+<li>src&#x2F; 用来放置源代码的地方</li>
+<li>build&#x2F; catkin(CMAKE)编译器放置缓存信息和中间文件的地方</li>
+<li>devel&#x2F; 生成的目标文件（包括头文件，动态链接库，静态链接库，可执行文件，环境变量等）</li>
+</ul>
+<p>catkin编译器在编译时，会递归的查找src&#x2F;下的每一个源代码包，因此也可以将几个源代码包放在同一文件夹下，如下图所示</p>
+<p><img src="/images/useful2.PNG" alt="2"></p>
+<h5 id="2-2-创建ROS-package"><a href="#2-2-创建ROS-package" class="headerlink" title="2.2 创建ROS package"></a>2.2 创建ROS package</h5><p>任何ROS的代码无论是C++还是Python都要放到package中，这样才能正常的编译和运行。一个ROS package中一般常见的文件有</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">├── CMakeLists.txt    #	package的编译规则(必须)</span><br><span class="line">├── package.xml       #	描述package的包名、版本号、作者、依赖等信息（必须）</span><br><span class="line">├── src/              #	源代码文件，包括C++源码(.cpp)以及Python的module(.py)</span><br><span class="line">├── include/          #	C++头文件</span><br><span class="line">├── scripts/          # 例如shell脚本(.sh)、Python脚本(.py)</span><br><span class="line">├── msg/              #	存放自定义格式的ROS消息(.msg)</span><br><span class="line">├── srv/              #	存放自定义格式的ROS服务(.srv)</span><br><span class="line">├── models/           #	存放机器人或仿真场景的3D模型(.sda, .stl, .dae等)</span><br><span class="line">├── urdf/             #	存放机器人的模型描述(.urdf或.xacro)</span><br><span class="line">├── launch/           #	存放launch文件(.launch或.xml)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第一步：创建package目录</strong></p>
+<p>创建一个package需要用到<code>catkin_create_pkg package depends</code>其中package是包名，depends是依赖的包名，可以依赖多个软件包。例如想要创建一个名为<code>ros_stanley</code>的包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd catkin_ws/src</span><br><span class="line">catkin_create_pkg ros_stanley roscpp rospy std_msgs</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二步：修改package中的cmakelist.txt</strong></p>
+<p><code>CMakeLists.txt</code>的基本语法都还是按照CMake，而Catkin在其中加入了少量的宏，总体的结构如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>() <span class="comment">#CMake的版本号 </span></span><br><span class="line"><span class="keyword">project</span>()                <span class="comment">#项目名称 </span></span><br><span class="line"><span class="keyword">find_package</span>()           <span class="comment">#找到编译需要的其他CMake/Catkin package</span></span><br><span class="line">catkin_python_setup()    <span class="comment">#catkin新加宏，打开catkin的Python Module的支持</span></span><br><span class="line">add_message_files()      <span class="comment">#catkin新加宏，添加自定义Message/Service/Action文件</span></span><br><span class="line">add_service_files()</span><br><span class="line">add_action_files()</span><br><span class="line">generate_message()       <span class="comment">#catkin新加宏，生成不同语言版本的msg/srv/action接口</span></span><br><span class="line">catkin_package()         <span class="comment">#catkin新加宏，生成当前package的cmake配置，供依赖本包的其他软件包调用</span></span><br><span class="line"><span class="keyword">add_library</span>()            <span class="comment">#生成库</span></span><br><span class="line"><span class="keyword">add_executable</span>()         <span class="comment">#生成可执行二进制文件</span></span><br><span class="line"><span class="keyword">add_dependencies</span>()       <span class="comment">#定义目标文件依赖于其他目标文件，确保其他目标已被构建</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>()  <span class="comment">#链接</span></span><br><span class="line">catkin_add_gtest()       <span class="comment">#catkin新加宏，生成测试</span></span><br><span class="line"><span class="keyword">install</span>()                <span class="comment">#安装至本机</span></span><br></pre></td></tr></table></figure>
+
+<p>(1)Cmakelist.txt的例子</p>
+<p>以ros_stanley为例，一般创建两个软件包，一个<code>custom_msgs</code>只用来存放ros msg。一个<code>ros_stanley</code>用来存放stanley的代码。</p>
+<p>①custom_msgs软件包的Cmakelist.txt</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span>.<span class="number">2</span>)	<span class="comment">#cmake至少为3.0.2版</span></span><br><span class="line"><span class="keyword">project</span>(custom_msgs)  <span class="comment"># 项目的名称为custom_msgs，在后续的文件中可以使用变量$&#123;PROJECT_NAME&#125;代替项目名称custom_msgs</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># find_package是cmake宏命令，指定依赖的其他pacakge，实际是生成了一些环境变量，如&lt;NAME&gt;_FOUND, &lt;NAME&gt;_INCLUDE_DIRS, &lt;NAME&gt;_LIBRARYIS</span></span><br><span class="line"><span class="comment"># 此处catkin是必备依赖 其余的roscpp...为组件</span></span><br><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS roscpp rospy message_generation std_msgs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定.msg文件</span></span><br><span class="line">add_message_files(FILES path_track.msg)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成msg的头文件和.py，生成的文件位于devel/include中</span></span><br><span class="line">generate_messages(DEPENDENCIES std_msgs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># catkin_package是catkin宏命令，用于配置ROS的package配置文件和CMake文件</span></span><br><span class="line"><span class="comment"># 这个命令必须在add_library()或者add_executable()之前调用，该函数有5个可选参数：</span></span><br><span class="line"><span class="comment"># (1) INCLUDE_DIRS 		- 导出包的include路径</span></span><br><span class="line"><span class="comment"># (2) LIBRARIES 		- 导出项目中的库</span></span><br><span class="line"><span class="comment"># (3) CATKIN_DEPENDS 	- 该项目依赖的其他catkin项目</span></span><br><span class="line"><span class="comment"># (4) DEPENDS 			- 该项目所依赖的非catkin CMake项目。</span></span><br><span class="line">catkin_package(</span><br><span class="line"><span class="comment">#  INCLUDE_DIRS include</span></span><br><span class="line"><span class="comment">#  LIBRARIES custom_msgs</span></span><br><span class="line">   CATKIN_DEPENDS message_runtime</span><br><span class="line"><span class="comment">#  DEPENDS system_lib</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>②ros_stanley中的cmakelist.txt</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span>.<span class="number">2</span>)</span><br><span class="line"><span class="keyword">project</span>(ros_stanley)        </span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">11</span>)</span><br><span class="line"><span class="comment">## 构建此软件包所需要依赖的软件包</span></span><br><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS roscpp rospy std_msgs message_generation custom_msgs)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 执行时依赖</span></span><br><span class="line">catkin_package(CATKIN_DEPENDS roscpp rospy std_msgs message_runtime)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 指定C++的头文件路径</span></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="keyword">include</span> <span class="variable">$&#123;catkin_INCLUDE_DIRS&#125;</span></span><br><span class="line"><span class="keyword">include_directories</span>(../../../devel/<span class="keyword">include</span>) <span class="comment">##include msg header</span></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/<span class="keyword">include</span>/eigen)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/<span class="keyword">include</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 生成可执行文件</span></span><br><span class="line"><span class="keyword">add_executable</span>(n_stanley_controller src/n_stanley_controller.cpp</span><br><span class="line">                                    src/stanley_controller.cpp)</span><br><span class="line"><span class="comment"># 添加可执行文件的依赖</span></span><br><span class="line"><span class="keyword">add_dependencies</span>(n_stanley_controller custom_msgs_gencpp)   <span class="comment">#让custom_msgs包先编译</span></span><br><span class="line"><span class="keyword">add_dependencies</span>(n_stanley_controller <span class="variable">$&#123;$&#123;PROJECT_NAME&#125;</span>_EXPORTED_TARGETS&#125; <span class="variable">$&#123;catkin_EXPORTED_TARGETS&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可执行文件链接相关的库</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(n_stanley_controller <span class="variable">$&#123;catkin_LIBRARIES&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第三步：修改package中的package.xml</strong></p>
+<p>(1)package.xml的作用</p>
+<p><code>pacakge.xml</code>包含了package的名称、版本号、内容描述、维护人员、软件许可、编译构建工具、编译依赖、运行依赖等信息。<br>实际上<code>rospack find</code>、<code>rosdep</code>等命令之所以能快速定位和分析出package的依赖项信息，就是直接读取了每一个pacakge中的<code>package.xml</code>文件。它为用户提供了快速了解一个pacakge的渠道。</p>
+<p>(2)package.xml的例子</p>
+<p><code>package.xml</code>现在有两种格式并存（format1和format2），两者区别不大，下面用ros_stanley中的package.xml来说明（format2）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">format</span>=<span class="string">&quot;2&quot;</span>&gt;</span>		<span class="comment">&lt;!--在声明package时指定format2格式--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>ros_stanley<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>The ros_stanley package<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">maintainer</span> <span class="attr">email</span>=<span class="string">&quot;hyh@todo.todo&quot;</span>&gt;</span>hyh<span class="tag">&lt;/<span class="name">maintainer</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">license</span>&gt;</span>TODO<span class="tag">&lt;/<span class="name">license</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">&lt;!--编译工具为catkin--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">buildtool_depend</span>&gt;</span>catkin<span class="tag">&lt;/<span class="name">buildtool_depend</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--编译依赖项--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>roscpp<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>rospy<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>std_msgs<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>message_generation<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>custom_msgs<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--导出依赖项--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build_export_depend</span>&gt;</span>roscpp<span class="tag">&lt;/<span class="name">build_export_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build_export_depend</span>&gt;</span>rospy<span class="tag">&lt;/<span class="name">build_export_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build_export_depend</span>&gt;</span>std_msgs<span class="tag">&lt;/<span class="name">build_export_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build_export_depend</span>&gt;</span>message_generation<span class="tag">&lt;/<span class="name">build_export_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">build_export_depend</span>&gt;</span>custom_msgs<span class="tag">&lt;/<span class="name">build_export_depend</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!--运行依赖项--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>roscpp<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>rospy<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>std_msgs<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>message_runtime<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>custom_msgs<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- The export tag contains other, unspecified, tags --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">export</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Other tools can request additional information be placed here --&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">export</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ROS2"><a href="#ROS2" class="headerlink" title="ROS2"></a>ROS2</h3><h4 id="1-ROS2的安装-卸载"><a href="#1-ROS2的安装-卸载" class="headerlink" title="1 ROS2的安装&#x2F;卸载"></a>1 ROS2的安装&#x2F;卸载</h4><ul>
+<li>使用脚本一键安装</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://fishros.com/install -O fishros &amp;&amp; bash fishros</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>手动安装</p>
+</li>
+<li><p>卸载</p>
+</li>
+</ul>
+<p> 针对ros2 foxy版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt remove ros-foxy-* &amp;&amp; <span class="built_in">sudo</span> apt autoremove</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-ROS2基础"><a href="#2-ROS2基础" class="headerlink" title="2 ROS2基础"></a>2 ROS2基础</h4><h5 id="2-1-工作空间和功能包"><a href="#2-1-工作空间和功能包" class="headerlink" title="2.1 工作空间和功能包"></a>2.1 工作空间和功能包</h5><blockquote>
+<p>注意：一个工作空间下可以有多个功能包，一个功能包可以有多个节点存在</p>
+</blockquote>
+<h6 id="2-1-1-工作空间"><a href="#2-1-1-工作空间" class="headerlink" title="2.1.1 工作空间"></a>2.1.1 工作空间</h6><p>工作空间的定义：工作空间是包含若干个功能包的目录，一开始大家把工作空间理解成一个文件夹就行了。这个文件夹包含下有<code>src</code>等文件夹</p>
+<p><strong>1.如何创建一个工作空间？</strong></p>
+<p>使用 <code>mkdir</code>创建一个目录，或者使用<code>mkdir -p</code>直接递归的创建<code>src</code>文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ros2_ws/src</span><br><span class="line"><span class="built_in">cd</span> ros2_ws/src</span><br></pre></td></tr></table></figure>
+
+<h6 id="2-1-2-功能包"><a href="#2-1-2-功能包" class="headerlink" title="2.1.2 功能包"></a>2.1.2 功能包</h6><p>功能包可以理解为存放节点的地方，ROS2中功能包根据编译方式的不同分为三种类型。</p>
+<ul>
+<li>ament_python，适用于python程序</li>
+<li>cmake，适用于C++</li>
+<li>ament_cmake，适用于C++程序,是cmake的增强版</li>
+</ul>
+<p><strong>1.如何获取一个功能包？</strong></p>
+<ul>
+<li>安装外部的功能包(功能包会自动放在ros的目录下，不用手动去source)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install ros-&lt;version&gt;-package_name</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>手动编译功能包，手动编译之后，需要手动的source工作空间中的Install目录</li>
+</ul>
+<h4 id="3-ROS2相关命令"><a href="#3-ROS2相关命令" class="headerlink" title="3 ROS2相关命令"></a>3 ROS2相关命令</h4><ul>
+<li><strong>功能包相关命令</strong></li>
+</ul>
+<blockquote>
+<p>1.每个包都有一个标配的manifest.xml文件，用于记录这个包的名字，构建工具，编译信息，拥有者，干啥用的等信息。通过这个文件，就可以自动为该功能包安装依赖，构建时确定编译顺序等</p>
+</blockquote>
+<p>创建功能包 <code>ros2 pkg create &lt;package-name&gt;  --build-type  &#123;cmake/ament_cmake/ament_python&#125;  --dependencies &lt;依赖名字&gt;</code></p>
+<p>列出所有的包名 <code>ros2 pkg list</code></p>
+<p>列出某个包所在路径的前缀 <code>ros2 pkg prefix &lt;package_name&gt;</code></p>
+<p>列出某个包的xml文件 <code>ros2 pkg xml &lt;package_name&gt; </code></p>
+<p>列出所有可执行文件 <code>ros2 pkg executables</code></p>
+<p>仅仅列出某个功能包内的可执行文件 <code>ros2 pkg executables &lt;package_name&gt;</code></p>
+<ul>
+<li><strong>节点相关命令</strong></li>
+</ul>
+<p>source包的相关资源 <code>source install/setup.bash</code></p>
+<p>运行一个节点（常用）<code>ros2 run &lt;package_name&gt; &lt;executable_name&gt;</code></p>
+<p>查看节点列表 <code>ros2 node list</code></p>
+<p>查看节点列表信息 <code>ros2 node info &lt;node_name&gt;</code></p>
+<p>重映射节点名称 <code>ros2 run turtlesim turtlesim_node --ros-args --remap __node:=my_turtle</code></p>
+<h4 id="4-ROS2的构建工具-colcon"><a href="#4-ROS2的构建工具-colcon" class="headerlink" title="4 ROS2的构建工具-colcon"></a>4 ROS2的构建工具-colcon</h4><ul>
+<li><strong>colcon是什么?</strong></li>
+</ul>
+<p>colcon其实是一个功能包构建工具，相当于ros1中的catkin工具。</p>
+<p>简单点说colcon就是用来编译代码的，在上一节中进行ROS2工作空间的创建后，但没有说如何进行编译，其实就是用colcon。</p>
+<p>ROS2默认是没有安装colcon的，需要自己手动安装。</p>
+<ul>
+<li><strong>安装colcon</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install python3-colcon-common-extensions</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>使用colcon</strong></li>
+</ul>
+<p><strong>前述知识</strong></p>
+<blockquote>
+<p>ros2工作空间中的文件夹结构和ros1不同。有build install log src四个文件夹，install对应ros1中的devel文件夹，多了一个log文件夹</p>
+</blockquote>
+<p>进入<code>ros2工作空间目录</code>，编译整个工作空间 <code>colcon build</code></p>
+<p>编译单独的包 <code>colcon build --packages-select &lt;package_name&gt; </code></p>
+<h4 id="4-ROS2-通信机制"><a href="#4-ROS2-通信机制" class="headerlink" title="4 ROS2 通信机制"></a>4 ROS2 通信机制</h4><h5 id="4-1-ROS2通信简介"><a href="#4-1-ROS2通信简介" class="headerlink" title="4.1 ROS2通信简介"></a>4.1 ROS2通信简介</h5><p>ROS2提供了四种通信方式：</p>
+<ul>
+<li>话题-Topics</li>
+<li>服务-Services</li>
+<li>动作-Action</li>
+<li>参数-Parameters</li>
+</ul>
+<p>除了参数之外，话题、服务和动作都支持自定义接口，每一种通信方式所适用的场景各不相同，所定义的接口也被分为话题接口、服务接口、动作接口三种。</p>
+<p><strong>这三种接口定义起来有什么不一样的地方呢？</strong></p>
+<p>话题接口格式：<code>xxx.msg</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int64 num</span><br></pre></td></tr></table></figure>
+
+<p>服务接口格式：<code>xxx.srv</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int64 a</span><br><span class="line">int64 b</span><br><span class="line">---</span><br><span class="line">int64 sum</span><br></pre></td></tr></table></figure>
+
+<p>动作接口格式：<code>xxx.action</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int32 order</span><br><span class="line">---</span><br><span class="line">int32[] sequence</span><br><span class="line">---</span><br><span class="line">int32[] partial_sequence</span><br></pre></td></tr></table></figure>
+
+<p><strong>我们只是简单的写了一下接口的类型，那么怎么在Python或者C++中调用这些接口呢？</strong></p>
+<p>ROS2的<code>IDL</code>转换器会自动帮我们完成代码的生成</p>
+<p><img src="/images/image-20220614142556029.png" alt="image-20220614142556029"></p>
+<p><strong>通信接口的常用命令</strong></p>
+<p>查看所有接口的列表<code>ros2 interface list</code></p>
+<p>查看接口所包含的包<code>ros2 interface packages</code></p>
+<p>查看某一个包下的所有接口<code>ros2 interface package &lt;包名&gt;</code>，例：<code>ros2 interface package std_msgs</code></p>
+<p>查看某一个接口的详细内容<code>ros2 interface show &lt;接口名&gt;</code>,例：<code>ros2 interface show std_msgs/msg/String</code></p>
+<h5 id="4-2-自定义通信接口"><a href="#4-2-自定义通信接口" class="headerlink" title="4.2 自定义通信接口"></a>4.2 自定义通信接口</h5><h6 id="4-2-1-自定义-msg"><a href="#4-2-1-自定义-msg" class="headerlink" title="4.2.1 自定义.msg"></a>4.2.1 自定义.msg</h6><p>.msg是topic通信的通信接口定义文件，在实际的工程中，为了减少功能包之间的依赖，通常将.msg定义在一个独立的功能包中，方便其他各个功能包去调用。在本节中，我们定义一个名为<code>custom_interface</code>的功能包。步骤如下：</p>
+<p><strong>0.建立工作空间</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ros2_ws/src</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.新建msg功能包</strong></p>
+<p>在工作空间的src文件夹下，新建一个名为<code>custom_interface</code>的功能包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 pkg create custom_interface --build-type ament_cmake</span><br></pre></td></tr></table></figure>
+
+<p>功能包的目录如下</p>
+<p><img src="/images/image-20220616083221186.png" alt="image-20220616083221186"></p>
+<p><strong>2.编写.msg的内容</strong></p>
+<p>我们在功能包根目录下<code>custom_interface/</code>新建一个<code>msg</code>文件夹，用来存<code>*.msg</code>文件。注意：ros2要求.msg文件的第一个字母一定要大写</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> msg</span><br><span class="line"><span class="built_in">cd</span> msg/</span><br><span class="line"><span class="built_in">touch</span> Test.msg</span><br></pre></td></tr></table></figure>
+
+<p>Test.msg文件的内容如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">float32 a       </span><br><span class="line">float32 b       </span><br><span class="line">float64 c       </span><br><span class="line">float64 d     	</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.修改功能包的CMakelist.txt</strong></p>
+<p>在完成了<code>.msg</code>文件的编写后，我们还需要在cmakelist.txt中添加以下内容，告诉编译器，需要将<code>.msg</code>编译成对应的Python库文件和C++头文件</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用于查找.msg预编译器的位置</span></span><br><span class="line"><span class="keyword">find_package</span>(rosidl_default_generators REQUIRED)</span><br><span class="line"><span class="comment"># 声明.msg所属的工程名字、文件位置以及依赖</span></span><br><span class="line">rosidl_generate_interfaces(<span class="variable">$&#123;PROJECT_NAME&#125;</span> <span class="string">&quot;msg/Test.msg&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>添加完成后的<code>cmakelist.txt</code>如下图所示。注意：必须完成<code>package.xml</code>文件的修改后，才可以rerun cmakelist，不然会报错。</p>
+<p><strong>4.修改package.xml</strong></p>
+<p>我们还需要修改<code>custom_interface</code>功能包下的<code>package.xml</code>文件，为工程添加所需的依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>rosidl_default_generators<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>rosidl_default_runtime<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">member_of_group</span>&gt;</span>rosidl_interface_packages<span class="tag">&lt;/<span class="name">member_of_group</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>添加的位置如下图所示</p>
+<img src="images/image-20220614154634790.png" alt="image-20220614154634790" style="zoom:67%;" />
+
+<p><strong>5.编译</strong></p>
+<p>至此，已经完成了<code>custom_interface</code>功能包的编写，我们重新编译一下该功能包即可。回到<strong>工作空间根目录</strong>下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">colcon build --packages-select custom_interface</span><br></pre></td></tr></table></figure>
+
+<p><strong>6.补充：如何确定自定义msg已经创建</strong></p>
+<p>进入<strong>工作空间</strong>根目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> install/setup.bash</span><br><span class="line">ros2 interface show custom_interface/msg/Test </span><br></pre></td></tr></table></figure>
+
+<p>显示如下内容，即成功创建了msg</p>
+<img src="images/image-20220616091047952.png" alt="image-20220616091047952" style="zoom:67%;" />
+
+<h5 id="3-3-ROS2话题"><a href="#3-3-ROS2话题" class="headerlink" title="3.3 ROS2话题"></a>3.3 ROS2话题</h5><h6 id="3-3-1-话题topic简介"><a href="#3-3-1-话题topic简介" class="headerlink" title="3.3.1 话题topic简介"></a>3.3.1 话题topic简介</h6><p>ros2话题是一个发布者、订阅者模型，可以是一个发布者，一个订阅者。还可以是1对n、n对1、n对n。</p>
+<p>我们可以在命令行中直接输入<code>rqt_graph</code>来查看ros2各个节点订阅和发布的话题。</p>
+<h6 id="3-3-2-topic的相关命令"><a href="#3-3-2-topic的相关命令" class="headerlink" title="3.3.2 topic的相关命令"></a>3.3.2 topic的相关命令</h6><p>0.帮助：<code>ros2 topic -h</code></p>
+<p>1.打印当前的所有话题：<code>ros2 topic list</code></p>
+<p>2.打印所有的话题，并且增加话题的消息类型：<code>ros2 topic list -t</code></p>
+<h6 id="3-3-3-topic通信代码实现（C"><a href="#3-3-3-topic通信代码实现（C" class="headerlink" title="3.3.3 topic通信代码实现（C++)"></a>3.3.3 topic通信代码实现（C++)</h6><p><strong>目标</strong>：创建一个另外的功能包<code>ros_cm</code>，使用自定义的<code>.msg</code>实现如图所示的通信结构</p>
+<img src="images/image-20220617103456728.png" alt="image-20220617103456728" style="zoom:67%;" />
+
+<p><strong>代码实现步骤如下：</strong></p>
+<p>0 进入<strong>工作空间&#x2F;src</strong>，创建功能包<code>ros_cm</code>，并且创建相应的.h和.cpp文件，如下图所示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ros2 pkg create ros_cm --build-type ament_cmake --dependencies rclcpp</span><br></pre></td></tr></table></figure>
+
+<img src="images/image-20220616093353442.png" alt="image-20220616093353442" style="zoom:67%;" />
+
+<p>1 想要在<code>ros_cm</code>中调用上节创建的<code>custom_interface</code>功能包，需要修改<code>cmakelist.txt</code>,添加如下内容</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(custom_interface REQUIRED)</span><br><span class="line">ament_target_dependencies(&lt;可执行文件名字&gt; rclcpp custom_interface)</span><br></pre></td></tr></table></figure>
+
+<p>完整的<code>CMakelist.txt</code>如下所示</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.5</span>)</span><br><span class="line"><span class="keyword">project</span>(ros_cm)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Default to C99</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">NOT</span> CMAKE_C_STANDARD)</span><br><span class="line">  <span class="keyword">set</span>(CMAKE_C_STANDARD <span class="number">99</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Default to C++14</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">NOT</span> CMAKE_CXX_STANDARD)</span><br><span class="line">  <span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">14</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(CMAKE_COMPILER_IS_GNUCXX <span class="keyword">OR</span> CMAKE_CXX_COMPILER_ID <span class="keyword">MATCHES</span> <span class="string">&quot;Clang&quot;</span>)</span><br><span class="line">  <span class="keyword">add_compile_options</span>(-Wall -Wextra -Wpedantic)</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># find dependencies</span></span><br><span class="line"><span class="keyword">if</span>(BUILD_TESTING)</span><br><span class="line">  <span class="keyword">find_package</span>(ament_lint_auto REQUIRED)</span><br><span class="line">  ament_lint_auto_find_test_dependencies()</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"><span class="keyword">find_package</span>(ament_cmake REQUIRED)</span><br><span class="line"><span class="keyword">find_package</span>(rclcpp REQUIRED)</span><br><span class="line"><span class="keyword">find_package</span>(custom_interface REQUIRED)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加可执行文件</span></span><br><span class="line"><span class="keyword">add_executable</span>(node_1 src/node_1.cpp)</span><br><span class="line"><span class="keyword">target_include_directories</span>(node_1 PRIVATE <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/<span class="keyword">include</span>)</span><br><span class="line">ament_target_dependencies(node_1 rclcpp custom_interface)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(node_2 src/node_2.cpp)</span><br><span class="line"><span class="keyword">target_include_directories</span>(node_2 PRIVATE <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/<span class="keyword">include</span>)</span><br><span class="line">ament_target_dependencies(node_2 rclcpp custom_interface)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将编译好的文件安装到install/&#123;package_name&#125;/lib/&#123;PROJECT_NAME&#125;目录下</span></span><br><span class="line"><span class="keyword">install</span>(TARGETS</span><br><span class="line">        node_1</span><br><span class="line">        node_2</span><br><span class="line">        DESTINATION lib/<span class="variable">$&#123;PROJECT_NAME&#125;</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">ament_package()</span><br></pre></td></tr></table></figure>
+
+<p>2 然后在<code>package.xml</code>中添加<code>rclcpp</code>和<code>custom_interface</code>的依赖项</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">depend</span>&gt;</span>rclcpp<span class="tag">&lt;/<span class="name">depend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">depend</span>&gt;</span>custom_interface<span class="tag">&lt;/<span class="name">depend</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>完整的<code>package.xml</code>如下所示</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml-model href=<span class="string">&quot;http://download.ros.org/schema/package_format3.xsd&quot;</span> schematypens=<span class="string">&quot;http://www.w3.org/2001/XMLSchema&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">format</span>=<span class="string">&quot;3&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>ros_cm<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>TODO: Package description<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">maintainer</span> <span class="attr">email</span>=<span class="string">&quot;hnu_huyunhao1995@163.com&quot;</span>&gt;</span>hyh<span class="tag">&lt;/<span class="name">maintainer</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">license</span>&gt;</span>TODO: License declaration<span class="tag">&lt;/<span class="name">license</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">buildtool_depend</span>&gt;</span>ament_cmake<span class="tag">&lt;/<span class="name">buildtool_depend</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">depend</span>&gt;</span>rclcpp<span class="tag">&lt;/<span class="name">depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">depend</span>&gt;</span>custom_interface<span class="tag">&lt;/<span class="name">depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">test_depend</span>&gt;</span>ament_lint_auto<span class="tag">&lt;/<span class="name">test_depend</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">test_depend</span>&gt;</span>ament_lint_common<span class="tag">&lt;/<span class="name">test_depend</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">export</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">build_type</span>&gt;</span>ament_cmake<span class="tag">&lt;/<span class="name">build_type</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">export</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3 编译<code>ros_cm</code>包，先cd到工作空间下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">colcon build --packages-select ros_cm</span><br></pre></td></tr></table></figure>
+
+<p>4 代码编写</p>
+<p><strong>node_1.h</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;rclcpp/rclcpp.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;custom_interface/msg/test.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std::chrono_literals;       <span class="comment">// 为了使用ms, s, min等单位</span></span><br><span class="line"><span class="keyword">using</span> std::placeholders::_1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Node1</span> : <span class="keyword">public</span> rclcpp::Node &#123;</span><br><span class="line">    <span class="keyword">using</span> MsgType = custom_interface::msg::Test;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Node1</span>() : <span class="built_in">Node</span>(<span class="string">&quot;node1&quot;</span>) &#123;</span><br><span class="line">        publisher_ = <span class="built_in">create_publisher</span>&lt;MsgType&gt;(<span class="string">&quot;node1_pub&quot;</span>, <span class="number">10</span>);</span><br><span class="line">        timer_ = <span class="built_in">create_wall_timer</span>(<span class="number">500</span>ms, std::<span class="built_in">bind</span>(&amp;Node1::pubCallBack, <span class="keyword">this</span>));</span><br><span class="line">        subscription_ = <span class="built_in">create_subscription</span>&lt;MsgType&gt;(<span class="string">&quot;node2_pub&quot;</span>, <span class="number">10</span>, std::<span class="built_in">bind</span>(&amp;Node1::subCallBack, <span class="keyword">this</span>, _1));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 发布消息时候的回调函数</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">pubCallBack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> msg = <span class="built_in">MsgType</span>();</span><br><span class="line">        msg.a = <span class="number">66.66</span>;</span><br><span class="line">        msg.b = <span class="number">77.77</span>;</span><br><span class="line">        <span class="built_in">RCLCPP_INFO</span>(<span class="built_in">get_logger</span>(), <span class="string">&quot;I publish: [a, b] = [%f, %f]&quot;</span>, msg.a, msg.b);</span><br><span class="line">        publisher_-&gt;<span class="built_in">publish</span>(msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">subCallBack</span><span class="params">(<span class="type">const</span> MsgType::SharedPtr msg)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">RCLCPP_INFO</span>(<span class="built_in">get_logger</span>(), <span class="string">&quot;I receive: [c, d] = [%f, %f]&quot;</span>, msg-&gt;c, msg-&gt;d);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    rclcpp::TimerBase::SharedPtr timer_;</span><br><span class="line">    rclcpp::Publisher&lt;MsgType&gt;::SharedPtr publisher_;</span><br><span class="line">    rclcpp::Subscription&lt;MsgType&gt;::SharedPtr subscription_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>node_1.cpp</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ros_cm/node_1.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    rclcpp::<span class="built_in">init</span>(argc, argv);</span><br><span class="line">    rclcpp::<span class="built_in">spin</span>(std::<span class="built_in">make_shared</span>&lt;Node1&gt;());</span><br><span class="line">    rclcpp::<span class="built_in">shutdown</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>node_2.h</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;rclcpp/rclcpp.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;custom_interface/msg/test.hpp&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std::chrono_literals;   <span class="comment">// 使用ms, s, min</span></span><br><span class="line"><span class="keyword">using</span> std::placeholders::_1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Node2</span>:<span class="keyword">public</span> rclcpp::Node&#123;</span><br><span class="line">    <span class="keyword">using</span> MsgType = custom_interface::msg::Test;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Node2</span>():<span class="built_in">Node</span>(<span class="string">&quot;node2&quot;</span>)&#123;</span><br><span class="line">        subscription_ = <span class="built_in">create_subscription</span>&lt;MsgType&gt;(</span><br><span class="line">                <span class="string">&quot;node1_pub&quot;</span>, <span class="number">10</span>, std::<span class="built_in">bind</span>(&amp;Node2::subCallBack, <span class="keyword">this</span>, _1));</span><br><span class="line">        publisher_ = <span class="built_in">create_publisher</span>&lt;MsgType&gt;(<span class="string">&quot;node2_pub&quot;</span>, <span class="number">10</span>);</span><br><span class="line">        timer_ = <span class="built_in">create_wall_timer</span>(<span class="number">500</span>ms, std::<span class="built_in">bind</span>(&amp;Node2::pubCallBack, <span class="keyword">this</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">subCallBack</span><span class="params">(<span class="type">const</span> MsgType::SharedPtr msg)</span><span class="type">const</span></span>&#123;</span><br><span class="line">        <span class="built_in">RCLCPP_INFO</span>(<span class="built_in">get_logger</span>(), <span class="string">&quot;I receive [a, b] = [%f, %f]&quot;</span>, msg-&gt;a, msg-&gt;b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">pubCallBack</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> msg = <span class="built_in">MsgType</span>();</span><br><span class="line">        msg.c = <span class="number">88.88</span>;</span><br><span class="line">        msg.d = <span class="number">99.99</span>;</span><br><span class="line">        publisher_-&gt;<span class="built_in">publish</span>(msg);</span><br><span class="line">        <span class="built_in">RCLCPP_INFO</span>(<span class="built_in">get_logger</span>(), <span class="string">&quot;I publish [c, d] = [%f, %f]&quot;</span>, msg.c, msg.d);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    rclcpp::TimerBase::SharedPtr timer_;</span><br><span class="line">    rclcpp::Subscription&lt;MsgType&gt;::SharedPtr subscription_;</span><br><span class="line">    rclcpp::Publisher&lt;MsgType&gt;::SharedPtr publisher_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>node_2.cpp</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ros_cm/node_2.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    rclcpp::<span class="built_in">init</span>(argc, argv);</span><br><span class="line">    rclcpp::<span class="built_in">spin</span>(std::<span class="built_in">make_shared</span>&lt;Node2&gt;());</span><br><span class="line">    rclcpp::<span class="built_in">shutdown</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AE%89%E8%A3%85/" rel="tag"># 安装</a>
+              <a href="/tags/ROS/" rel="tag"># ROS</a>
+              <a href="/tags/%E4%BD%BF%E7%94%A8/" rel="tag"># 使用</a>
+              <a href="/tags/%E5%91%BD%E4%BB%A4/" rel="tag"># 命令</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/01/other_tools/gdbNote/" rel="prev" title="gdb笔记">
+      <i class="fa fa-chevron-left"></i> gdb笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/01/matlab_python/PythonNote/" rel="next" title="Python笔记">
+      Python笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROS1"><span class="nav-number">1.</span> <span class="nav-text">ROS1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-ROS%E5%AE%89%E8%A3%85%E4%B8%AD%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">1 ROS安装中的常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-sudo-rosdep-init%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 sudo rosdep init出现错误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-rosdep-update%E6%8A%A5%E9%94%99"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 rosdep update报错</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-ROS1%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">2 ROS1的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%88%9D%E5%A7%8B%E5%8C%96catkin%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 创建并初始化catkin工作空间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-%E5%88%9B%E5%BB%BAROS-package"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 创建ROS package</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROS2"><span class="nav-number">2.</span> <span class="nav-text">ROS2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-ROS2%E7%9A%84%E5%AE%89%E8%A3%85-%E5%8D%B8%E8%BD%BD"><span class="nav-number">2.1.</span> <span class="nav-text">1 ROS2的安装&#x2F;卸载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-ROS2%E5%9F%BA%E7%A1%80"><span class="nav-number">2.2.</span> <span class="nav-text">2 ROS2基础</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E5%92%8C%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 工作空间和功能包</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1-1-%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">2.1.1 工作空间</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1-2-%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">2.1.2 功能包</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-ROS2%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">2.3.</span> <span class="nav-text">3 ROS2相关命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-ROS2%E7%9A%84%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7-colcon"><span class="nav-number">2.4.</span> <span class="nav-text">4 ROS2的构建工具-colcon</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-ROS2-%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6"><span class="nav-number">2.5.</span> <span class="nav-text">4 ROS2 通信机制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-ROS2%E9%80%9A%E4%BF%A1%E7%AE%80%E4%BB%8B"><span class="nav-number">2.5.1.</span> <span class="nav-text">4.1 ROS2通信简介</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%80%9A%E4%BF%A1%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.5.2.</span> <span class="nav-text">4.2 自定义通信接口</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#4-2-1-%E8%87%AA%E5%AE%9A%E4%B9%89-msg"><span class="nav-number">2.5.2.1.</span> <span class="nav-text">4.2.1 自定义.msg</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-ROS2%E8%AF%9D%E9%A2%98"><span class="nav-number">2.5.3.</span> <span class="nav-text">3.3 ROS2话题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3-1-%E8%AF%9D%E9%A2%98topic%E7%AE%80%E4%BB%8B"><span class="nav-number">2.5.3.1.</span> <span class="nav-text">3.3.1 话题topic简介</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3-2-topic%E7%9A%84%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">2.5.3.2.</span> <span class="nav-text">3.3.2 topic的相关命令</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3-3-topic%E9%80%9A%E4%BF%A1%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%EF%BC%88C"><span class="nav-number">2.5.3.3.</span> <span class="nav-text">3.3.3 topic通信代码实现（C++)</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">胡云浩</p>
+  <div class="site-description" itemprop="description">记录生活，记录工作，记录学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">52</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">胡云浩</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
